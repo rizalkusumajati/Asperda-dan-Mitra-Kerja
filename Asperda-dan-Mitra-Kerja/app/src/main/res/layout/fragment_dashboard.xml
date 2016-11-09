@@ -31,9 +31,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
+                android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
                 android:text="@string/anggota_asperda_terdekat"/>
             <ListView
@@ -48,6 +50,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"

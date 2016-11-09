@@ -14,6 +14,7 @@ android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:textStyle="bold"
             android:id="@+id/nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,6 +27,9 @@ android:layout_weight="1"
         <RatingBar
             style="?android:attr/ratingBarStyleSmall"
             android:id="@+id/rating"
+
+            android:backgroundTint="@color/colorAccent"
+            android:progressBackgroundTint="@color/colorAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

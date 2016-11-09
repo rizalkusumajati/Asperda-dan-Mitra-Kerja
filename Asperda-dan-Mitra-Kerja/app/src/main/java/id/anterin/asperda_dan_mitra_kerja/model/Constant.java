@@ -8,4 +8,5 @@ public class Constant {
     public static final String KEY_NAMA="nama";
     public static final String KEY_ALAMAT="alamat";
     public static final String KEY_RATING="rating";
+
 }
