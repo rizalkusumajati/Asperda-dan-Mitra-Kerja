@@ -1,12 +1,14 @@
 package id.anterin.asperda_dan_mitra_kerja;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import java.util.HashMap;
 
 import id.anterin.asperda_dan_mitra_kerja.adapter.AndroidImageAdapter;
 import id.anterin.asperda_dan_mitra_kerja.adapter.ListDashboardAdapter;
+import id.anterin.asperda_dan_mitra_kerja.detailDashboard.DetailListClickFragment;
 import id.anterin.asperda_dan_mitra_kerja.model.Constant;
 
 /**
@@ -25,6 +28,7 @@ public class DashboardFragment extends Fragment {
     private ListView listView,listViewMitra;
     private ListDashboardAdapter adapter, adapterMitra;
     private ArrayList<HashMap<String, String>> listDetail,listDetailMitra;
+    private DetailListClickFragment detailListClickFragment;
     String[] namaPerusahaan= new String[]{"A","B","C"};
     String[] alamatPerusahaan= new String[]{"D","E","F"};
     String[] ratingPerusahaan= new String[]{"4","3","2"};
@@ -41,11 +45,19 @@ public class DashboardFragment extends Fragment {
         AndroidImageAdapter adapterView = new AndroidImageAdapter(getActivity());
         mViewPager.setAdapter(adapterView);
 
+        detailListClickFragment=new DetailListClickFragment();
+
         listView=(ListView)view.findViewById(R.id.listViewAnggota);
         listViewMitra=(ListView)view.findViewById(R.id.listViewMitra);
 
 
         setListView();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                gotoDetail();
+            }
+        });
         return view;
     }
 
@@ -76,6 +88,14 @@ public class DashboardFragment extends Fragment {
            Utility.setListViewHeightBasedOnChildren(listView);
            Utility.setListViewHeightBasedOnChildren(listViewMitra);
         }
+
+    public void gotoDetail(){
+        getActivity().getSupportFragmentManager().beginTransaction()
+
+                .replace(R.id.content_main, detailListClickFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Asperda-dan-Mitra-Kerja</string>
+    <string name="app_name">ASPERDA &amp; MITRA</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,7 +31,34 @@
     <string name="detail">Details</string>
     <string name="produk">Produk</string>
     <string name="lokasi">Lokasi</string>
+    <string name="hubungi">Hubungi</string>
+    <string name="tinggalkan_pesan">Tinggalkan Pesan</string>
+    <string name="login">Login</string>
+    <string name="login_google">Login dengan g+</string>
+    <string name="login_facebook">Login dengan facebook</string>
+    <string name="belum_member">Belum jadi member? Daftar sekarang</string>
+    <string name="judul_registrasi">Daftar Rent Car Indonesia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_name">Nama lengkap</string>
+    <string name="prompt_alamat">Alamat</string>
+    <string name="prompt_nomor">Nomor Handphone</string>
+    <string name="prompt_nama_perusahaan">Nama Perusahaan</string>
+    <string name="prompt_input_ulang">Input Ulang Password</string>
+    <string name="daftar">Daftar</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
