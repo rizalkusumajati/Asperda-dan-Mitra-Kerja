@@ -28,6 +28,9 @@
 
     <string name="anggota_asperda_terdekat">Anggota ASPERDA terdekat</string>
     <string name="mitra_asperda_terdekat">Mitra ASPERDA terdekat</string>
+    <string name="detail">Details</string>
+    <string name="produk">Produk</string>
+    <string name="lokasi">Lokasi</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

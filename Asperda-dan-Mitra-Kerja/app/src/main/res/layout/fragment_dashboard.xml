@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="id.anterin.asperda_dan_mitra_kerja.DashboardActivity">
+    tools:context="id.anterin.asperda_dan_mitra_kerja.DashboardFragment">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_below="@id/toolbar"
+
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -17,34 +19,48 @@
             android:id="@+id/viewPageAndroid"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
+
         <LinearLayout
-            android:layout_weight="1"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anggota_asperda_terdekat"/>
             <ListView
+                android:scrollbars="none"
                 android:id="@+id/listViewAnggota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
         </LinearLayout>
         <LinearLayout
-            android:layout_weight="1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mitra_asperda_terdekat"/>
             <ListView
+                android:scrollbars="none"
                 android:id="@+id/listViewMitra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
         </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

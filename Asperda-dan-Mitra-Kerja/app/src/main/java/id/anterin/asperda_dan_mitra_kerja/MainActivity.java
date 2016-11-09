@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
         dashboardFragment=new DashboardFragment();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
 
                 .replace(R.id.content_main, dashboardFragment)
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
 
     }
