@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="id.anterin.asperda_dan_mitra_kerja.MainActivity"
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 </FrameLayout>

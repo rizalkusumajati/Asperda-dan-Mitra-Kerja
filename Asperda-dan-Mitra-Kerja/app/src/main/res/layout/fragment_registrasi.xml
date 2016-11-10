@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="id.anterin.asperda_dan_mitra_kerja.registrasi.RegistrasiFragment">
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.registrasi.RegistrasiFragment">
 
     <TextView
         android:padding="10dp"
