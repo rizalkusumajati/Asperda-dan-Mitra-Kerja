@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    tools:context="id.anterin.asperda_dan_mitra_kerja.login.LoginFragment">
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.login.LoginFragment">
 
 
     <TextView

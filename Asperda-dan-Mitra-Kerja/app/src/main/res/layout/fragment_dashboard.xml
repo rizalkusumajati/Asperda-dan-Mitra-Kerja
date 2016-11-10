@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="id.anterin.asperda_dan_mitra_kerja.DashboardFragment">
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.DashboardFragment">
 
     <ScrollView
         android:layout_width="match_parent"
