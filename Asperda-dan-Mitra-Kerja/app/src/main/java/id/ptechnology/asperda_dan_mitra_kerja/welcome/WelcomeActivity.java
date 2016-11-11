@@ -18,9 +18,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import id.ptechnology.asperda_dan_mitra_kerja.MainActivity;
-import id.ptechnology.asperda_dan_mitra_kerja.PrefManager;
+import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
+import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
+import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefKey;
 
 public class WelcomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
@@ -29,15 +30,15 @@ public class WelcomeActivity extends AppCompatActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
-    private PrefManager prefManager;
+   // public PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Checking for first time launch - before calling setContentView()
-        prefManager = new PrefManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
+      //  prefManager = new PrefManager(this);
+        if (PrefHelper.getBoolean(PrefKey.PREF_NAME)) {
             launchHomeScreen();
             finish();
         }
@@ -120,7 +121,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
+        PrefHelper.setBoolean(PrefKey.PREF_NAME,true);
+       // prefManager.setFirstTimeLaunch(false);
         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         finish();
     }

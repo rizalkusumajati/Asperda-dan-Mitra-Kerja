@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="id.ptechnology.asperda_dan_mitra_kerja.registrasi.RegistrasiFragment">
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.registrasi.view.RegistrasiFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
         android:padding="10dp"
@@ -17,14 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/nama"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_name"
 
-            android:textColor="@android:color/white"
-            android:inputType="textEmailAddress"
+
+            android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -34,13 +41,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/email"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
 
-            android:textColor="@android:color/white"
+
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true" />
@@ -51,14 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/alamat"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_alamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_alamat"
 
-            android:textColor="@android:color/white"
-            android:inputType="textEmailAddress"
+
+            android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -73,14 +80,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/nomor"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_nomor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_nomor"
 
-            android:textColor="@android:color/white"
-            android:inputType="textEmailAddress"
+
+            android:inputType="number"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -90,14 +97,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/nama_perusahaan"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_namaPerusahaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_nama_perusahaan"
 
-            android:textColor="@android:color/white"
-            android:inputType="textEmailAddress"
+
+            android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -108,15 +115,15 @@
         app:passwordToggleEnabled="false"
         android:layout_height="wrap_content">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
 
-            android:id="@+id/password"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
-            android:backgroundTint="@android:color/white"
+
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
 
@@ -130,14 +137,14 @@
         app:passwordToggleEnabled="false"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/input_ulang"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_inputUlang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_input_ulang"
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
-            android:backgroundTint="@android:color/white"
+
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
 
@@ -147,11 +154,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_daftar"
         android:layout_marginTop="10dp"
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="@string/daftar"/>
-
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

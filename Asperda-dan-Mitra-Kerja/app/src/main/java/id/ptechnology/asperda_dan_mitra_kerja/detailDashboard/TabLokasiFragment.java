@@ -56,11 +56,12 @@ public class TabLokasiFragment extends Fragment {
 
                         .position(RAGUNAN)
                         .title("Ragunan"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RAGUNAN, 14));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
             }
         });
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(RAGUNAN, 14));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
+
 
         return view;
     }
