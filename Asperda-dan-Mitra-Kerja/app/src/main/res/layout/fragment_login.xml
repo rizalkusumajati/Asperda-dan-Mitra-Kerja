@@ -6,12 +6,15 @@
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
+
     tools:context="id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment">
 
 
     <TextView
         android:padding="10dp"
         android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +22,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
+
        android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
@@ -26,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
-
+            android:textColorHint="@android:color/white"
 
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -36,7 +40,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        app:passwordToggleEnabled="false"
+        app:passwordToggleTint="@android:color/darker_gray"
+
         android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
@@ -49,34 +54,43 @@
 
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
-
+            android:backgroundTint="@color/blue"
             android:maxLines="1"
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:background="@color/blue"
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
         android:text="@string/login"/>
 
 
     <Button
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimaryDark"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_google"/>
 
 
     <Button
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimaryDark"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_facebook"/>
 
     <Button
+        android:textColor="@android:color/white"
         android:id="@+id/register"
         android:background="@android:color/transparent"
         android:textAllCaps="false"

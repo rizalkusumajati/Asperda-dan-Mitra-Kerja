@@ -11,7 +11,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.registrasi.view.RegistrasiFragment
 
 public interface RegisterPresenter {
 
-    boolean validate(String email,String password);
+    boolean validate(String email, String password, String nama,String alamat,String nomor,String company);
     boolean isEmailValid(String email);
 
     void register(String email, String password, String nama_member, String alamat_member, String tmplahir_member,

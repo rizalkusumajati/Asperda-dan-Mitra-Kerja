@@ -86,6 +86,21 @@ public class ServiceGenerator {
     public void getMemberId(String path, Callback<List<MemberResponse>> callback){
         Call<List<MemberResponse>>call=serviceClass.getMemberId(path);
         call.enqueue(callback);
-    };
+    }
+
+    public void getCompany(Callback <List<CompanyResponse>> callback){
+        Call<List<CompanyResponse>> call=serviceClass.getCompany();
+        call.enqueue(callback);
+    }
+
+    public void getMitra(Callback <List<CompanyResponse>> callback){
+        Call<List<CompanyResponse>> call=serviceClass.getMitra();
+        call.enqueue(callback);
+    }
+
+    public void getCompanyByMember(String id,Callback <List<CompanyResponse>> callback){
+        Call<List<CompanyResponse>> call=serviceClass.getCompanyByMember(id);
+        call.enqueue(callback);
+    }
 
 }

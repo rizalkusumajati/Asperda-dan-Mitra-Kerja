@@ -26,7 +26,13 @@ public class RegisterPresenterImp implements RegisterPresenter {
     }
 
     @Override
-    public boolean validate(String email, String password) {
+    public boolean validate(String email, String password, String nama,String alamat,String nomor,String company) {
+        if(TextUtils.isEmpty(nama)){
+            registerView.showNamaRequired();
+            return false;
+        }
+
+
         if (TextUtils.isEmpty(email)) {
             registerView.showEmailKosongValidation();
             return false;
@@ -36,6 +42,21 @@ public class RegisterPresenterImp implements RegisterPresenter {
                 registerView.showValidationEmailError();
                 return false;
             }
+        }
+
+        if(TextUtils.isEmpty(alamat)){
+            registerView.showAlamatRequired();
+            return false;
+        }
+
+        if(TextUtils.isEmpty(nomor)){
+            registerView.showNomorRequired();
+            return false;
+        }
+
+        if(TextUtils.isEmpty(company)){
+            registerView.showCompanyRequired();
+            return false;
         }
 
         if(TextUtils.isEmpty(password)){

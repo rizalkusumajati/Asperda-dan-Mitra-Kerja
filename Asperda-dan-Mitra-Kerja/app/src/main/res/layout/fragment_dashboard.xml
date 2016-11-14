@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="id.ptechnology.asperda_dan_mitra_kerja.DashboardFragment">
+
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,9 +17,17 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
         <android.support.v4.view.ViewPager
+            android:background="@android:color/white"
             android:id="@+id/viewPageAndroid"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
+
+        <me.relex.circleindicator.CircleIndicator
+
+            android:id="@+id/indicator"
+            android:layout_marginTop="-50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
         <LinearLayout
 
@@ -31,6 +40,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
@@ -58,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mitra_asperda_terdekat"/>
             <ListView
+
                 android:scrollbars="none"
                 android:id="@+id/listViewMitra"
                 android:layout_width="match_parent"

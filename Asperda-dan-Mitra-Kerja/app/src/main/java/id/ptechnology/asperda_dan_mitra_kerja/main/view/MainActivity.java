@@ -1,8 +1,6 @@
 package id.ptechnology.asperda_dan_mitra_kerja.main.view;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import id.ptechnology.asperda_dan_mitra_kerja.DashboardFragment;
+import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenter;
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        presenter.tryRetrofit();
+       // presenter.tryRetrofit();
         if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)){
             hideItem();
             changeName();
@@ -181,8 +179,8 @@ public class MainActivity extends AppCompatActivity
         /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
         tv_namaPerusahaan = (TextView)header.findViewById(R.id.tv_namaPerusahaan);
         tv_nama = (TextView)header.findViewById(R.id.tv_nama);
-        tv_namaPerusahaan.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
-        tv_nama.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_ID));
+        tv_namaPerusahaan.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN));
+        tv_nama.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
     }
 
     public void defaultName(){

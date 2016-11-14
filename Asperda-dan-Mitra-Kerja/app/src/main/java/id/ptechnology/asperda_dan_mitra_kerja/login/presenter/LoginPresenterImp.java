@@ -55,8 +55,7 @@ public class LoginPresenterImp implements LoginPresenter {
 
                    getMemberDetail(response.body().getIdMember(),activity);
                    System.out.println("Login Fragment " +PrefHelper.getBoolean(PrefKey.PREF_LOGIN));
-                   activity.hideItem();
-                   activity.gotoHome();
+
                }
                 else {
                    loginView.showToast("Username dan Password tidak ditemukan.");
@@ -81,10 +80,19 @@ public class LoginPresenterImp implements LoginPresenter {
                 System.out.println("id member : "+path);
                 System.out.println("Response code: "+ response.code());
                 if (response.code()==200){
-                    System.out.println("Response get Id member : "+response.body().get(0).getEmailMember());
-                    PrefHelper.setString(PrefKey.PREF_LOGIN_NAME,response.body().get(0).getEmailMember());
-                    System.out.println("Pref Email :"+ PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
-                    activity.changeName();
+                    if (response.body().size()!=0) {
+                        System.out.println("Response get Id member : " + response.body().get(0).getEmailMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN, response.body().get(0).getEmailMember());
+                        System.out.println("Pref Email :" + PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
+                        activity.hideItem();
+                        activity.gotoHome();
+                        activity.changeName();
+                    }
+                    else {
+                        loginView.showToast("Please Register");
+                    }
+
                 }
 
             }

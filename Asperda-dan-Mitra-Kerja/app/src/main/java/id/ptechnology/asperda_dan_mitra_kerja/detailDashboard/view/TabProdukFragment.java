@@ -1,4 +1,4 @@
-package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard;
+package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view;
 
 
 import android.os.Bundle;

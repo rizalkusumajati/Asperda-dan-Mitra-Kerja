@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
@@ -25,6 +27,8 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
     private RegisterPresenter presenter;
     private ProgressDialog progressDialog;
     private LoginFragment loginFragment;
+    private Spinner spinner;
+    private String[] arraySpinner;
 
     public RegistrasiFragment() {
         // Required empty public constructor
@@ -45,6 +49,8 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
         etPassword=(TextInputEditText)view.findViewById(R.id.et_password);
         etInputUlang=(TextInputEditText)view.findViewById(R.id.et_inputUlang);
         btnDaftar=(Button)view.findViewById(R.id.btn_daftar);
+        spinner=(Spinner)view.findViewById(R.id.spinnerKota);
+
         progressDialog=new ProgressDialog(getContext());
         progressDialog.setMessage("Loading, please wait!");
         progressDialog.setIndeterminate(false);
@@ -52,16 +58,26 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
         presenter=new RegisterPresenterImp(this);
         loginFragment=new LoginFragment();
 
+        this.arraySpinner = new String[] {
+                "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item, arraySpinner);
+        spinner.setAdapter(adapter);
+
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (presenter.validate(etEmail.getText().toString(),etPassword.getText().toString())){
+                if (presenter.validate(etEmail.getText().toString(),etPassword.getText().toString(),etNama.getText().toString(),
+                                       etAlamat.getText().toString(),etNomor.getText().toString(),etNamaPerusahaan.getText().toString())){
                     presenter.register(etEmail.getText().toString(),etPassword.getText().toString(),etNama.getText().toString(),
                                        etAlamat.getText().toString(),null,null,null,etNomor.getText().toString(),null,
                                         etNamaPerusahaan.getText().toString(),null,progressDialog, RegistrasiFragment.this,loginFragment);
                 }
             }
         });
+
+
 
 
 
@@ -92,4 +108,30 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
     public void showToast(String message) {
 
     }
+
+    @Override
+    public void showNamaRequired() {
+        etNama.setError(getString(R.string.error_field_required));
+        etNama.requestFocus();
+    }
+
+    @Override
+    public void showAlamatRequired() {
+        etAlamat.setError(getString(R.string.error_field_required));
+        etAlamat.requestFocus();
+    }
+
+    @Override
+    public void showNomorRequired() {
+        etNomor.setError(getString(R.string.error_field_required));
+        etNomor.requestFocus();
+    }
+
+    @Override
+    public void showCompanyRequired() {
+        etNamaPerusahaan.setError(getString(R.string.error_field_required));
+        etNamaPerusahaan.requestFocus();
+    }
+
+
 }

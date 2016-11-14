@@ -5,7 +5,7 @@
         android:id="@+id/grupKamera">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_black_24dp"
             android:title="Home" />
         <item
             android:id="@+id/nav_gallery"
@@ -13,7 +13,7 @@
             android:title="Company" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_directions_car_black_24dp"
             android:title="My Cars" />
     </group>
 
@@ -21,7 +21,7 @@
         android:id="@+id/grupKamera1"  >
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_directions_car_black_24dp"
             android:title="My Partners" />
     </group>
 
@@ -29,7 +29,7 @@
         android:id="@+id/grupKamera2"  >
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_directions_car_black_24dp"
                 android:title="My Stock" />
             <item
                 android:id="@+id/nav_send"

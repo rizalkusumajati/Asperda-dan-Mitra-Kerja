@@ -2,22 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.TabDetailFragment">
+    tools:context="id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view.TabDetailFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pic_company"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/bg_screen1"/>
+
 
     <LinearLayout
+        android:layout_below="@id/pic_company"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+
+
         <TextView
+            android:id="@+id/tv_namaPerusahaan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:text="Nama Perushaan "/>
 
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/iv_logoPerusahaan"
                 android:layout_marginRight="10dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -28,18 +49,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/nama"
+                    android:id="@+id/tv_alamatPerusahaan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bios Tour &amp; Travel"/>
                 <TextView
-                    android:id="@+id/alamat"
+                    android:id="@+id/tv_kotaPerusahaan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="alamat"/>
 
                 <TextView
-                    android:id="@+id/email"
+                    android:id="@+id/tv_emailPerusahaan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="http://a.b.c"/>
@@ -57,6 +78,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_keteranganPerusahaan"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -72,9 +94,10 @@
             android:background="@android:color/darker_gray"></View>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_marginRight="20dp"
@@ -82,12 +105,19 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content">
-            <ImageView
 
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@android:drawable/ic_menu_search"/>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_call_white_24dp"
+
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_call"
+                    android:id="@+id/imageView2" />
+
                 <TextView
+                   android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hubungi"/>
@@ -101,10 +131,14 @@
                 android:layout_height="wrap_content">
             <ImageView
 
+                android:tint="@android:color/darker_gray"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@android:drawable/ic_menu_search"/>
+               android:backgroundTint="@android:color/darker_gray"
+                android:background="@drawable/ic_mail_black_24dp"/>
+
                 <TextView
+                    android:layout_marginTop="0dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tinggalkan_pesan"/>
@@ -120,5 +154,6 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
+    </RelativeLayout>
+</ScrollView>
 </RelativeLayout>

@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,6 +80,7 @@ public class ListDashboardAdapter extends BaseAdapter {
         TextView nama = (TextView) vi.findViewById(R.id.nama);
         TextView tanggal = (TextView) vi.findViewById(R.id.alamat);
         RatingBar ratingBar=(RatingBar)vi.findViewById(R.id.rating);
+        ImageView logoCompany=(ImageView)vi.findViewById(R.id.iv_logoCompany);
 
 
         HashMap<String, String> song = new HashMap<String, String>();
@@ -85,7 +89,8 @@ public class ListDashboardAdapter extends BaseAdapter {
         nama.setText(song.get(Constant.KEY_NAMA));
         tanggal.setText(song.get( Constant.KEY_ALAMAT));
         ratingBar.setRating(Float.parseFloat(song.get( Constant.KEY_RATING)));
-
+        Picasso.with(activity).load(Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY)).into(logoCompany);
+        Log.e("picasso",Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY));
 
 
         // Setting all values in list

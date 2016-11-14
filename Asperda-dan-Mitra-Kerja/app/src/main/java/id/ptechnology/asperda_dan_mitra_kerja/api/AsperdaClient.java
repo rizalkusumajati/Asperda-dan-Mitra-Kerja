@@ -34,6 +34,15 @@ public interface AsperdaClient {
                                                @Field("kota_member") String kota_member,@Field("nama_company") String nama_company,
                                                @Field("pic_member") String pic);
 
+    @GET("api/amember/getCompanyByType?type=asperda")
+    Call<List<CompanyResponse>> getCompany();
+
+    @GET("api/amember/getCompanyByType?type=mitra")
+    Call<List<CompanyResponse>> getMitra();
+
+    @GET("api/amember/getCompanyByMember")
+    Call<List<CompanyResponse>> getCompanyByMember(@Query("id_member") String id);
+
 
 
 }

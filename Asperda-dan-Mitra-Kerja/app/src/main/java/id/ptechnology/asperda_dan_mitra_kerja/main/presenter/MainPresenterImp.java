@@ -21,7 +21,7 @@ public class MainPresenterImp implements MainPresenter {
             public void onResponse(Call<List<MemberResponse>> call, Response<List<MemberResponse>> response) {
                 System.out.println("Response code: "+ response.code());
 
-                System.out.println("Response body: "+response.body().get(1).getNamaMember());
+               // System.out.println("Response body: "+response.body().get(1).getNamaMember());
             }
 
             @Override

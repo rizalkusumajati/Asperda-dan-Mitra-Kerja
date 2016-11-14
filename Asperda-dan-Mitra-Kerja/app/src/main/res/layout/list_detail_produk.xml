@@ -16,23 +16,28 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@android:drawable/alert_dark_frame"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_directions_car_black_24dp"
+
                 />
             <TextView
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inova"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_marginBottom="10dp"
                 android:textStyle="bold"
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NAMA MOBIL "/>
@@ -47,16 +52,21 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lokasi "/>
 
                     <TextView
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sopir"/>
 
                     <TextView
+                        android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="BBM"/>
@@ -68,16 +78,21 @@
                      android:orientation="vertical">
 
                      <TextView
+                         android:textColor="@android:color/black"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text=":"/>
 
                      <TextView
+                         android:textColor="@android:color/black"
+                         android:layout_marginTop="5dp"
+                         android:layout_marginBottom="5dp"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text=":"/>
 
                      <TextView
+                         android:textColor="@android:color/black"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text=":"/>
@@ -90,16 +105,21 @@
                      android:orientation="vertical">
 
                      <TextView
+                         android:textColor="@android:color/black"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="Lokasi"/>
 
                      <TextView
+                         android:textColor="@android:color/black"
+                         android:layout_marginTop="5dp"
+                         android:layout_marginBottom="5dp"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="Sopir"/>
 
                      <TextView
+                         android:textColor="@android:color/black"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="BBM"/>
@@ -111,6 +131,7 @@
 
     </LinearLayout>
     <TextView
+        android:textColor="@android:color/black"
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
