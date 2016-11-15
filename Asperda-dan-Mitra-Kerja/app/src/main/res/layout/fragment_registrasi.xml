@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:background="@android:color/white"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -10,12 +10,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:background="@android:color/white"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
     <TextView
-        android:textColor="@android:color/black"
+        android:textColor="@color/textBlack"
         android:textStyle="bold"
         android:padding="10dp"
         android:textSize="20dp"
@@ -34,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_name"
 
-            android:backgroundTint="@color/blue"
+
 
             android:inputType="text"
             android:maxLines="1"
@@ -53,7 +56,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
 
-            android:backgroundTint="@color/blue"
+
 
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -72,7 +75,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_alamat"
 
-            android:backgroundTint="@color/blue"
+
 
             android:inputType="text"
             android:maxLines="1"
@@ -80,8 +83,11 @@
 
     </android.support.design.widget.TextInputLayout>
 <LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     android:orientation="horizontal"
-
+    android:padding="2dp"
+    android:background="@drawable/bg_call"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Spinner
@@ -102,7 +108,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_nomor"
 
-            android:backgroundTint="@color/blue"
+
 
             android:inputType="number"
             android:maxLines="1"
@@ -121,7 +127,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_nama_perusahaan"
 
-            android:backgroundTint="@color/blue"
+
 
             android:inputType="text"
             android:maxLines="1"
@@ -144,7 +150,7 @@
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
 
-            android:backgroundTint="@color/blue"
+
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
 
@@ -168,7 +174,7 @@
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
 
-            android:backgroundTint="@color/blue"
+
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
 
@@ -178,16 +184,64 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/btn_daftar"
         android:layout_marginTop="10dp"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:text="@string/daftar"/>
+        <!--<LinearLayout-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+            <!--<View-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/lineGrey"></View>-->
+            <!--<TextView-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="atau"/>-->
+
+            <!--<View-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/lineGrey"></View>-->
+        <!--</LinearLayout>-->
+
+
+        <!--<com.google.android.gms.common.SignInButton-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/sign_in_button"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_marginBottom="0dp"/>-->
+
+
+
+        <!--<Button-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/login_facebook"/>-->
+
+
     </LinearLayout>
 </ScrollView>
 </LinearLayout>

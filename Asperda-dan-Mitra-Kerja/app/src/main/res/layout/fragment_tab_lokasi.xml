@@ -5,11 +5,10 @@
     tools:context="id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view.TabLokasiFragment">
 
     <fragment
-
         android:id="@+id/map"
-
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_height="match_parent"/>
 
 

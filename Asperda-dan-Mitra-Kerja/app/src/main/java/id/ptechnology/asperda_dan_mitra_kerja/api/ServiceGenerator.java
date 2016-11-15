@@ -103,4 +103,16 @@ public class ServiceGenerator {
         call.enqueue(callback);
     }
 
+    public void getProdukByMember(String id,Callback <List<ProdukResponse>> callback){
+        Call<List<ProdukResponse>> call=serviceClass.getProdukByMember(id);
+        call.enqueue(callback);
+    }
+
+    public void getMemberByEmail(String email, Callback <List<MemberResponse>>callback){
+        Call<List<MemberResponse>> call=serviceClass.getMemberByEmail(email);
+        call.enqueue(callback);
+
+    }
+
+
 }

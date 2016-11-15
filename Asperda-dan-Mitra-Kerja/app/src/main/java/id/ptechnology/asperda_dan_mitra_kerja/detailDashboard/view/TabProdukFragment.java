@@ -13,6 +13,8 @@ import java.util.HashMap;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.adapter.ListProdukAdapter;
+import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabProdukFragmentPresenter;
+import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabProdukFragmentPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 
 /**
@@ -25,6 +27,7 @@ public class TabProdukFragment extends Fragment {
     String[] namaPerusahaan= new String[]{"A","B","C"};
     String[] alamatPerusahaan= new String[]{"D","E","F"};
     String[] ratingPerusahaan= new String[]{"4","3","2"};
+    private TabProdukFragmentPresenter presenter;
 
     public TabProdukFragment() {
         // Required empty public constructor
@@ -37,33 +40,15 @@ public class TabProdukFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_tab_produk, container, false);
         listView=(ListView)view.findViewById(R.id.listView);
-        setListView();
+        presenter=new TabProdukFragmentPresenterImp();
+
+
+
+
+        presenter.setListView(listDetail,adapter,listView,getActivity());
         return view;
     }
 
-    public void setListView(){
 
-        listDetail = new ArrayList<HashMap<String, String>>();
-
-        adapter = new ListProdukAdapter(getActivity(), listDetail);
-
-        adapter.clear();
-        int i=0;
-        for (String perusahaan:namaPerusahaan){
-
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put(Constant.KEY_NAMA, perusahaan);
-
-            map.put(Constant.KEY_ALAMAT, alamatPerusahaan[i]);
-            map.put(Constant.KEY_RATING,ratingPerusahaan[i]);
-
-            adapter.addItem(map);
-
-            i++;
-        }
-
-        listView.setAdapter(adapter);
-
-    }
 
 }

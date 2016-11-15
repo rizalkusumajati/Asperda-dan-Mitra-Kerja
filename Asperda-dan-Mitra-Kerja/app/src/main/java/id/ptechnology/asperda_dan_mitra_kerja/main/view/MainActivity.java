@@ -1,33 +1,62 @@
 package id.ptechnology.asperda_dan_mitra_kerja.main.view;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenterImp;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefKey;
+import id.ptechnology.asperda_dan_mitra_kerja.registrasi.view.RegistrasiFragment;
+
+import static id.ptechnology.asperda_dan_mitra_kerja.model.Constant.mGoogleApiClient;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private DashboardFragment dashboardFragment;
     private LoginFragment loginFragment;
+    private RegistrasiFragment registrasiFragment;
+    private ProgressDialog progressDialog;
     private MainPresenter presenter;
     private NavigationView navigationView;
     private TextView tv_namaPerusahaan,tv_nama;
+    public GoogleApiClient googleApiClient;
+    private static final int RC_SIGN_IN = 9001;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (Constant.getmGoogleApiClient() != null)
+            Constant.getmGoogleApiClient().connect();
+        else {
+
+            Constant.setmGoogleApiClient(presenter.createGoogleSignIn(googleApiClient, this, this, this));
+        }
+
+        presenter.handleOnStart(Constant.getmGoogleApiClient(),this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +67,15 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         presenter=new MainPresenterImp();
         dashboardFragment=new DashboardFragment();
+        registrasiFragment=new RegistrasiFragment();
         loginFragment=new LoginFragment();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         System.out.println("isLogin " + PrefHelper.getBoolean(PrefKey.PREF_LOGIN));
 
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Authenticating, please wait!");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
 
 
 
@@ -149,6 +183,9 @@ public class MainActivity extends AppCompatActivity
             gotoLogin();
         }else if (id == R.id.nav_logout) {
             logout();
+            //mGoogleApiClient.stopAutoManage(LoginFragment);
+           // mGoogleApiClient.disconnect();
+           // Constant.setmGoogleApiClient(null);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,6 +211,14 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void gotoRegister(){
+        getSupportFragmentManager().beginTransaction()
+
+                .replace(R.id.content_main, registrasiFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void changeName(){
         View header=navigationView.getHeaderView(0);
         /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
@@ -193,13 +238,26 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void logout(){
-        PrefHelper.setBoolean(PrefKey.PREF_LOGIN,false);
-        PrefHelper.clearPreference(PrefKey.PREF_LOGIN_ID);
-        PrefHelper.clearPreference(PrefKey.PREF_LOGIN_NAME);
+
+        presenter.handleLogout(MainActivity.this);
+
         defaultName();
         showItem();
     }
 
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d("Google", "onConnectionFailed:" + connectionResult);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.handleActivityResult(requestCode,RC_SIGN_IN,data,this);
+    }
+
+    public void signInGoogle(){
+        presenter.signInGoogle(MainActivity.this,Constant.getmGoogleApiClient(),RC_SIGN_IN);
+    }
 }

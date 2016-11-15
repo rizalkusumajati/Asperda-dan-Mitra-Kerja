@@ -2,29 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_marginTop="10dp"
+    android:background="@android:color/white"
     android:layout_height="wrap_content">
-
-    <ImageView
-        android:layout_marginLeft="5dp"
-
-        android:id="@+id/iv_logoCompany"
-        android:layout_marginRight="10dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@android:drawable/ic_menu_search"/>
+        android:layout_marginRight="10dp"
+        android:background="@android:drawable/ic_menu_search"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/transparent"/>
+    <!--<ImageView-->
+        <!--android:layout_marginLeft="5dp"-->
+
+        <!--android:id="@+id/iv_logoCompany"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="@android:drawable/ic_menu_search"/>-->
     <LinearLayout
 android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:id="@+id/nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bios Tour &amp; Travel"/>
         <TextView
+           android:textSize="12dp"
+            android:textColor="@color/textBlack"
             android:id="@+id/alamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,16 +43,19 @@ android:layout_weight="1"
         <RatingBar
             style="?android:attr/ratingBarStyleSmall"
             android:id="@+id/rating"
-
-            android:backgroundTint="@color/colorAccent"
-            android:progressBackgroundTint="@color/colorAccent"
+            android:rating="2"
+            android:progressTint="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:secondaryProgress="@color/colorPrimary"
+           android:secondaryProgressTint="@color/colorPrimary"
+
 
             />
     </LinearLayout>
 
     <TextView
+        android:textColor="@color/textBlack"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
 

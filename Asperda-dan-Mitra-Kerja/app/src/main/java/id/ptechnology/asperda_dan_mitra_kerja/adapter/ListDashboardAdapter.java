@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 
@@ -80,7 +81,8 @@ public class ListDashboardAdapter extends BaseAdapter {
         TextView nama = (TextView) vi.findViewById(R.id.nama);
         TextView tanggal = (TextView) vi.findViewById(R.id.alamat);
         RatingBar ratingBar=(RatingBar)vi.findViewById(R.id.rating);
-        ImageView logoCompany=(ImageView)vi.findViewById(R.id.iv_logoCompany);
+        //ImageView logoCompany=(ImageView)vi.findViewById(R.id.iv_logoCompany);
+        CircleImageView circleImageView=(CircleImageView)vi.findViewById(R.id.profile_image);
 
 
         HashMap<String, String> song = new HashMap<String, String>();
@@ -89,7 +91,7 @@ public class ListDashboardAdapter extends BaseAdapter {
         nama.setText(song.get(Constant.KEY_NAMA));
         tanggal.setText(song.get( Constant.KEY_ALAMAT));
         ratingBar.setRating(Float.parseFloat(song.get( Constant.KEY_RATING)));
-        Picasso.with(activity).load(Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY)).into(logoCompany);
+        Picasso.with(activity).load(Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY)).into(circleImageView);
         Log.e("picasso",Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY));
 
 

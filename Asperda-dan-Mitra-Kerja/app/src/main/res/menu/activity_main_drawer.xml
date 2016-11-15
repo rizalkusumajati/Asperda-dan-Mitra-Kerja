@@ -5,15 +5,15 @@
         android:id="@+id/grupKamera">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/home_36x36"
             android:title="Home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/company_36x36"
             android:title="Company" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_directions_car_black_24dp"
+            android:icon="@drawable/my_car_36x36"
             android:title="My Cars" />
     </group>
 
@@ -21,7 +21,7 @@
         android:id="@+id/grupKamera1"  >
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_directions_car_black_24dp"
+            android:icon="@drawable/my_partner_36x36"
             android:title="My Partners" />
     </group>
 
@@ -29,21 +29,21 @@
         android:id="@+id/grupKamera2"  >
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_directions_car_black_24dp"
+                android:icon="@drawable/my_stock_36x36"
                 android:title="My Stock" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/setting_36x36"
                 android:title="Setting" />
             <item
                 android:id="@+id/nav_login"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/login_36x36"
                 android:title="Login" />
 
         <item
             android:id="@+id/nav_logout"
             android:visible="false"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/login_36x36"
             android:title="Logout" />
     </group>
 

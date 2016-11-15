@@ -1,5 +1,6 @@
 package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter;
 
+import android.app.ProgressDialog;
 import android.util.Log;
 
 import java.util.List;
@@ -26,11 +27,13 @@ public class TabDetailFragmentPresenterImp implements TabDetailFragmentPresenter
 
 
     @Override
-    public void getCompanyByMember(){
+    public void getCompanyByMember(final ProgressDialog progressDialog){
+        progressDialog.show();
         Log.i("InCompany","Method CompanyByMember");
         new ServiceGenerator().getCompanyByMember(Constant.getIdCompany(), new Callback<List<CompanyResponse>>() {
             @Override
             public void onResponse(Call<List<CompanyResponse>> call, Response<List<CompanyResponse>> response) {
+                progressDialog.dismiss();
                 Log.i("InCompany",""+response.code());
                 if (response.code()==200){
                     List<CompanyResponse> companyResponse=response.body();
@@ -44,6 +47,7 @@ public class TabDetailFragmentPresenterImp implements TabDetailFragmentPresenter
 
             @Override
             public void onFailure(Call<List<CompanyResponse>> call, Throwable t) {
+                progressDialog.dismiss();
                 Log.i("InCompany",""+t.getMessage());
             }
         });

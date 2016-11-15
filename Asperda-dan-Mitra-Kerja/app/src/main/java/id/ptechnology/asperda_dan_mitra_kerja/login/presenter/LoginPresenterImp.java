@@ -1,7 +1,20 @@
 package id.ptechnology.asperda_dan_mitra_kerja.login.presenter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.List;
 
@@ -24,7 +37,7 @@ import retrofit2.Response;
  */
 
 public class LoginPresenterImp implements LoginPresenter {
-
+    private String TAG="Google";
     private LoginView loginView;
 
     public LoginPresenterImp(LoginView loginView){
@@ -84,6 +97,7 @@ public class LoginPresenterImp implements LoginPresenter {
                         System.out.println("Response get Id member : " + response.body().get(0).getEmailMember());
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN, response.body().get(0).getEmailMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_VIA,"api");
                         System.out.println("Pref Email :" + PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
                         activity.hideItem();
                         activity.gotoHome();
@@ -130,4 +144,6 @@ public class LoginPresenterImp implements LoginPresenter {
         }
         return true;
     }
+
+
 }

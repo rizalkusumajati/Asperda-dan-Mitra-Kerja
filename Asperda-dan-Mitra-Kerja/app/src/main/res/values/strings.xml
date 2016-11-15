@@ -33,10 +33,10 @@
     <string name="lokasi">Lokasi</string>
     <string name="hubungi">Hubungi</string>
     <string name="tinggalkan_pesan">Tinggalkan Pesan</string>
-    <string name="login">Login</string>
-    <string name="login_google">Login dengan g+</string>
+    <string name="login">Masuk</string>
+    <string name="login_google">Login dengan Google</string>
     <string name="login_facebook">Login dengan facebook</string>
-    <string name="belum_member">Belum jadi member? Daftar sekarang</string>
+    <string name="belum_member">Belum jadi member? <b>Daftar sekarang</b></string>
     <string name="judul_registrasi">Daftar Rent Car Indonesia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -44,6 +44,7 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Nama lengkap</string>

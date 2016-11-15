@@ -1,6 +1,7 @@
 package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.api.CompanyResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
@@ -32,10 +34,11 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class TabDetailFragment extends Fragment implements TabDetailFragmentView {
-    private ImageView ivLogoPerusahaan;
+    private CircleImageView ivLogoPerusahaan;
     private TextView tvNamaPerusahaan,tvAlamatPerusahaan,tvKotaPerusahaan,tvEmailPerusahaan,tvKeteranganPerusahaan;
     private TabDetailFragmentPresenter presenter;
     String logoPerusahaan,namaPerusahaan,  alamatPerusahaan,  kotaPerusahaan, emailPerusahaan,  keteranganPerusahaan;
+    private ProgressDialog progressDialog;
 
 
     public TabDetailFragment() {
@@ -50,8 +53,13 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
         View view=inflater.inflate(R.layout.fragment_tab_detail, container, false);
 
 
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading, please wait!");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
 
-        ivLogoPerusahaan=(ImageView)view.findViewById(R.id.iv_logoPerusahaan);
+
+        ivLogoPerusahaan=(CircleImageView) view.findViewById(R.id.iv_logoPerusahaan);
         tvNamaPerusahaan=(TextView)view.findViewById(R.id.tv_namaPerusahaan);
         tvAlamatPerusahaan=(TextView)view.findViewById(R.id.tv_alamatPerusahaan);
         tvKotaPerusahaan=(TextView)view.findViewById(R.id.tv_kotaPerusahaan);
@@ -62,7 +70,7 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
 
 
         if (Constant.getCompanyByMember()==null)
-        presenter.getCompanyByMember();
+        presenter.getCompanyByMember(progressDialog);
         else
         setData(Constant.getCompanyByMember().get(0).getPicCompany(),Constant.getCompanyByMember().get(0).getNamaCompany(),Constant.getCompanyByMember().get(0).getAlamatCompany(),Constant.getCompanyByMember().get(0).getKotacompany(),Constant.getCompanyByMember().get(0).getEmailCompany(),Constant.getCompanyByMember().get(0).getKetCompany());
 

@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 
 /**
  * Created by ASUS on 09/11/2016.
@@ -71,6 +73,22 @@ public class ListProdukAdapter extends BaseAdapter {
         if (convertView == null)
             vi = inflater.inflate(R.layout.list_detail_produk, null);
 
+        TextView namaKeterangan=(TextView)vi.findViewById(R.id.tv_namaKeterangan);
+        TextView namaMobil=(TextView)vi.findViewById(R.id.tv_namaMobil);
+        TextView lokasiMobil=(TextView)vi.findViewById(R.id.tv_lokasiMobil);
+       // TextView sopir=(TextView)vi.findViewById(R.id.tv_sopir);
+        //TextView bbm=(TextView)vi.findViewById(R.id.tv_bbm);
+        //TextView harga=(TextView)vi.findViewById(R.id.tv_harga);
+
+        HashMap<String, String> song = new HashMap<String, String>();
+        song = data.get(position);
+
+        namaKeterangan.setText(song.get(Constant.KEY_NAMA_KETERANGAN));
+        namaMobil.setText(song.get(Constant.KEY_NAMA_MOBIL));
+        lokasiMobil.setText(song.get(Constant.KEY_LOKASI_MOBIL));
+     //   sopir.setText(song.get(Constant.KEY_SOPIR_MOBIL));
+      //  bbm.setText(song.get(Constant.KEY_BBM_MOBIL));
+      //  harga.setText("Rp."+song.get(Constant.KEY_HARGA_MOBIL));
 
         // Setting all values in list
 

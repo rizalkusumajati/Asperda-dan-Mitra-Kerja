@@ -18,7 +18,7 @@ public interface AsperdaClient {
     @GET("api/amember/getMember")
     Call<List<MemberResponse>> getMember();
 
-    @GET("api/amember/getMember")
+    @GET("api/amember/getMemberById")
     Call<List<MemberResponse>> getMemberId(@Query("id_member") String id);
 
     @FormUrlEncoded
@@ -42,6 +42,14 @@ public interface AsperdaClient {
 
     @GET("api/amember/getCompanyByMember")
     Call<List<CompanyResponse>> getCompanyByMember(@Query("id_member") String id);
+
+    @GET("api/amember/getProductByMember")
+    Call<List<ProdukResponse>> getProdukByMember(@Query("id_member") String id);
+
+    @GET("api/amember/getMemberByEmail")
+    Call<List<MemberResponse>> getMemberByEmail(@Query("email") String email);
+
+
 
 
 

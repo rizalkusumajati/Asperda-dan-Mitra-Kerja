@@ -14,6 +14,8 @@ import android.widget.Spinner;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
+import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
 import id.ptechnology.asperda_dan_mitra_kerja.registrasi.presenter.RegisterPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.registrasi.presenter.RegisterPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.registrasi.presenter.RegisterView;
@@ -58,6 +60,11 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
         presenter=new RegisterPresenterImp(this);
         loginFragment=new LoginFragment();
 
+        if (!Constant.isEmailGoogleFound()){
+            etEmail.setText(Constant.getEmailGoogle());
+            etNama.setText(Constant.getNamaGoogle());
+        }
+
         this.arraySpinner = new String[] {
                 "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"
         };
@@ -74,6 +81,8 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
                                        etAlamat.getText().toString(),null,null,null,etNomor.getText().toString(),null,
                                         etNamaPerusahaan.getText().toString(),null,progressDialog, RegistrasiFragment.this,loginFragment);
                 }
+
+
             }
         });
 

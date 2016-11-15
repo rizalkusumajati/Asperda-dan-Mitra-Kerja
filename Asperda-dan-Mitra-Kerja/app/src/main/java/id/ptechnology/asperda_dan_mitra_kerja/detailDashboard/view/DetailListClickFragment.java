@@ -136,9 +136,7 @@ public class DetailListClickFragment extends Fragment {
 
     public void setViewPager(){
 
-        if (Constant.getCompanyByMember()==null){
-        Toast.makeText(getActivity(),"NUll member",Toast.LENGTH_SHORT).show();
-       }
+
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(),getActivity());
 
         adapter.addFrag(new TabDetailFragment());

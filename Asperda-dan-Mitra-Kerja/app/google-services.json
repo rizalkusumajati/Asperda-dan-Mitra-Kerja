@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "888684270549",
+    "project_id": "asperdadanmitra"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888684270549:android:d9fd022cb2815160",
+        "android_client_info": {
+          "package_name": "id.ptechnology.asperda_dan_mitra_kerja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888684270549-8ikan8i0roehfqpf9mnpe35ue0pne6jb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.ptechnology.asperda_dan_mitra_kerja",
+            "certificate_hash": "33015147DC1B8F9BEA6A3DA3ACC40570E451F4E6"
+          }
+        },
+        {
+          "client_id": "888684270549-mc6b3h64dvhtbheo387rd0lkto3me0nr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOkko3xvUNM8SYnrM9U5nZRurzKWcPoqI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

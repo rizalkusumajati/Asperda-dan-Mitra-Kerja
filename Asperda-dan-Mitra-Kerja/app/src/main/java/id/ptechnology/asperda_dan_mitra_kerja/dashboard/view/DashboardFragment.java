@@ -72,6 +72,8 @@ public class DashboardFragment extends Fragment implements DashboardView {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                     Constant.setIdCompany(presenter.getIdCompany(i));
+                    Constant.setProdukBymember(null);
+                    Constant.setCompanyByMember(null);
 
                     gotoDetail();
                 }
@@ -82,7 +84,8 @@ public class DashboardFragment extends Fragment implements DashboardView {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Constant.setIdCompany(presenter.getIdMitra(i));
-
+                Constant.setProdukBymember(null);
+                Constant.setCompanyByMember(null);
                 gotoDetail();
             }
         });

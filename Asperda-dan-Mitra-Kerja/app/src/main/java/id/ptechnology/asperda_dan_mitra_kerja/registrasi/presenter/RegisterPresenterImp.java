@@ -7,6 +7,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.api.RegisterResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefKey;
 import id.ptechnology.asperda_dan_mitra_kerja.registrasi.view.RegistrasiFragment;
@@ -83,6 +84,9 @@ public class RegisterPresenterImp implements RegisterPresenter {
                     System.out.println("Response body: " + response.body().getStat());
 
                     registerView.showToast("Register Success");
+                    if (!Constant.isEmailGoogleFound()){
+                        Constant.setEmailGoogleFound(true);
+                    }
                     gotoLogin(registrasiFragment,loginFragment);
 
 

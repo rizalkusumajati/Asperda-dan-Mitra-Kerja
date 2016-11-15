@@ -2,9 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view.DetailListClickFragment">
 
     <LinearLayout
+        android:padding="5dp"
+        android:background="@color/colorPrimary"
         android:id="@+id/layout_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,18 +21,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         <TextView
-            android:padding="10dp"
+
+            android:padding="5dp"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detail"/>
         </LinearLayout>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black"></View>
 
     <LinearLayout
         android:id="@+id/tab_produk"
@@ -40,18 +41,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-            android:padding="10dp"
+            android:padding="5dp"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/produk"/>
         </LinearLayout>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black"></View>
+
 
     <LinearLayout
         android:id="@+id/tab_lokasi"
@@ -62,9 +61,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-            android:padding="10dp"
+            android:padding="5dp"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lokasi"/>

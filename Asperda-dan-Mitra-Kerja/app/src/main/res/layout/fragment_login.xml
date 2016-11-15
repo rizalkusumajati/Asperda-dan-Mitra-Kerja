@@ -2,18 +2,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
 
+    android:gravity="center_horizontal"
     tools:context="id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"/>
 
     <TextView
         android:padding="10dp"
         android:textSize="20dp"
-        android:textColor="@android:color/white"
+        android:textColor="@color/textBlack"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -30,7 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
-            android:textColorHint="@android:color/white"
 
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -54,14 +69,14 @@
 
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
-            android:backgroundTint="@color/blue"
+
             android:maxLines="1"
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:background="@color/blue"
+        android:background="@color/colorPrimary"
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,15 +84,50 @@
         android:textColor="@android:color/white"
         android:text="@string/login"/>
 
-
     <Button
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_gravity="center_horizontal"
+       android:textColor="@color/textGrey"
+        android:id="@+id/register"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/belum_member"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_google"/>
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <View
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/lineGrey"></View>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textGrey"
+            android:textStyle="bold"
+            android:text="atau"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/lineGrey"></View>
+    </LinearLayout>
+
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_marginTop="10dp"
+        android:id="@+id/sign_in_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"/>
+
 
 
     <Button
@@ -89,14 +139,9 @@
         android:layout_height="wrap_content"
         android:text="@string/login_facebook"/>
 
-    <Button
-        android:textColor="@android:color/white"
-        android:id="@+id/register"
-        android:background="@android:color/transparent"
-        android:textAllCaps="false"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/belum_member"/>
 
+
+
+</LinearLayout>
+    </ScrollView>
 </LinearLayout>

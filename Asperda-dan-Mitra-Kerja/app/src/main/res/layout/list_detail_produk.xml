@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -22,6 +23,8 @@
 
                 />
             <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_namaKeterangan"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,12 +38,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_marginBottom="10dp"
+                android:id="@+id/tv_namaMobil"
+                android:layout_marginBottom="5dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NAMA MOBIL "/>
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/tv_harga"
+                android:textColor="@color/textBlack"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. 60000"/>
 
              <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,24 +65,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textBlack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lokasi "/>
+                        android:text="Keterangan "/>
 
-                    <TextView
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sopir"/>
+                    <!--<TextView-->
+                        <!--android:textColor="@color/textBlack"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Sopir"/>-->
 
-                    <TextView
-                        android:textColor="@android:color/black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BBM"/>
+                    <!--<TextView-->
+                        <!--android:textColor="@color/textBlack"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="BBM"/>-->
 
             </LinearLayout>
                  <LinearLayout
@@ -78,51 +91,54 @@
                      android:orientation="vertical">
 
                      <TextView
-                         android:textColor="@android:color/black"
+                         android:textColor="@color/textBlack"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text=":"/>
 
-                     <TextView
-                         android:textColor="@android:color/black"
-                         android:layout_marginTop="5dp"
-                         android:layout_marginBottom="5dp"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text=":"/>
+                     <!--<TextView-->
+                         <!--android:textColor="@color/textBlack"-->
+                         <!--android:layout_marginTop="5dp"-->
+                         <!--android:layout_marginBottom="5dp"-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text=":"/>-->
 
-                     <TextView
-                         android:textColor="@android:color/black"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text=":"/>
+                     <!--<TextView-->
+                         <!--android:textColor="@color/textBlack"-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text=":"/>-->
 
                  </LinearLayout>
                  <LinearLayout
-
+                     android:layout_marginLeft="10dp"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:orientation="vertical">
 
                      <TextView
-                         android:textColor="@android:color/black"
+                         android:id="@+id/tv_lokasiMobil"
+                         android:textColor="@color/textBlack"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="Lokasi"/>
 
-                     <TextView
-                         android:textColor="@android:color/black"
-                         android:layout_marginTop="5dp"
-                         android:layout_marginBottom="5dp"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Sopir"/>
+                     <!--<TextView-->
+                         <!--android:id="@+id/tv_sopir"-->
+                         <!--android:textColor="@color/textBlack"-->
+                         <!--android:layout_marginTop="5dp"-->
+                         <!--android:layout_marginBottom="5dp"-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text="Sopir"/>-->
 
-                     <TextView
-                         android:textColor="@android:color/black"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="BBM"/>
+                     <!--<TextView-->
+                         <!--android:id="@+id/tv_bbm"-->
+                         <!--android:textColor="@color/textBlack"-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text="BBM"/>-->
 
                  </LinearLayout>
 
@@ -130,11 +146,6 @@
         </LinearLayout>
 
     </LinearLayout>
-    <TextView
-        android:textColor="@android:color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp. 60000"/>
+
 
 </LinearLayout>
