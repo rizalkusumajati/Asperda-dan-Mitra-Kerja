@@ -65,6 +65,11 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
             etNama.setText(Constant.getNamaGoogle());
         }
 
+        if (!Constant.isEmailFacebookFound()){
+            etEmail.setText(Constant.getEmailFacebook());
+            etNama.setText(Constant.getNamaFacebook());
+        }
+
         this.arraySpinner = new String[] {
                 "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"
         };

@@ -55,6 +55,16 @@ public class CompanyResponse {
     @Expose
     private String longitudeCompany;
 
+    private double jarak;
+
+    public double getJarak() {
+        return jarak;
+    }
+
+    public void setJarak(double jarak) {
+        this.jarak = jarak;
+    }
+
     /**
      *
      * @return

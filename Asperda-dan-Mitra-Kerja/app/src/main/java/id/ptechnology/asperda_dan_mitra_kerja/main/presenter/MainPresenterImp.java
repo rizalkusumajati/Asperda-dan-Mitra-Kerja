@@ -3,10 +3,24 @@ package id.ptechnology.asperda_dan_mitra_kerja.main.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -15,9 +29,16 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
+import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.api.MemberResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
 import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
@@ -37,6 +58,7 @@ import static id.ptechnology.asperda_dan_mitra_kerja.model.Constant.namaGoogle;
 public class MainPresenterImp implements MainPresenter {
     private String TAG="Google";
     private GoogleApiClient mGoogleApiClient1;
+    private static final int REQUEST_CODE = 0;
     @Override
     public void tryRetrofit() {
         new ServiceGenerator().getMember(new Callback<List<MemberResponse>>() {
@@ -69,9 +91,21 @@ public class MainPresenterImp implements MainPresenter {
 
              //   Constant.setmGoogleApiClient(null);
                 break;
+            case "facebook":
+                LoginManager.getInstance().logOut();
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void gotoFragment(MainActivity activity,Fragment fragment) {
+       activity.getSupportFragmentManager().beginTransaction()
+
+                .replace(R.id.content_main, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -214,7 +248,7 @@ public class MainPresenterImp implements MainPresenter {
                     else {
 
                         Constant.setEmailGoogleFound(false);
-
+                        logout(Constant.getmGoogleApiClient(),activity);
                         ((MainActivity)activity).gotoRegister();
 
                     }
@@ -228,6 +262,162 @@ public class MainPresenterImp implements MainPresenter {
 
             }
         });
+    }
+
+
+
+    @Override
+    public void loginFb(LoginButton loginButton, CallbackManager callbackManager, final Activity activity) {
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                // Application code
+                                Bundle bFacebookData = getFacebookData(object);
+                                System.out.println("Email Fb : "+bFacebookData.getString("email"));
+
+                                Constant.setEmailFacebook(bFacebookData.getString("email"));
+                                Constant.setNamaFacebook(bFacebookData.getString("name"));
+                                getMemberByFb(activity);
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+
+
+
+                System.out.println("User ID: "
+                        + loginResult.getAccessToken().getUserId()
+                        + "\n" +
+                        "Auth Token: "
+                        + loginResult.getAccessToken().getToken()
+                        + "\n" +
+                        "Name"
+                        +loginResult.getAccessToken().getToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.i("CancelFb","Login Cancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.i("ErrorFb","Login Error" + error.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public Bundle getFacebookData(JSONObject object) {
+        try {
+            Bundle bundle = new Bundle();
+            String id = object.getString("id");
+
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
+            if (object.has("birthday"))
+                bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("location"))
+                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+            return bundle;
+        }
+        catch(JSONException e) {
+            Log.d(TAG,"Error parsing JSON");
+        }
+
+        return null;
+    }
+
+    @Override
+    public void getMemberByFb(final Activity activity) {
+        new ServiceGenerator().getMemberByEmail(Constant.getEmailFacebook(), new Callback<List<MemberResponse>>() {
+            @Override
+            public void onResponse(Call<List<MemberResponse>> call, Response<List<MemberResponse>> response) {
+                //  progressDialog.dismiss();
+                if (response.code()==200){
+                    if (response.body().size()!=0){
+
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN, response.body().get(0).getEmailMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_VIA,"facebook");
+
+                        Constant.setEmailFacebookFound(true);
+
+                        ((MainActivity)activity).hideItem();
+
+                        ((MainActivity)activity).changeName();
+                        ((MainActivity)activity).gotoHome();
+                    }
+                    else {
+
+                        Constant.setEmailFacebookFound(false);
+                        LoginManager.getInstance().logOut();
+                        ((MainActivity)activity).gotoRegister();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MemberResponse>> call, Throwable t) {
+                //   progressDialog.dismiss();
+
+
+            }
+        });
+    }
+
+    @Override
+    public void buildAlertMessageNoGps(final MainActivity activity) {
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setMessage("GPS harus diaktifkan untuk menggunakan aplikasi ini")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            activity.startActivityForResult(intent, REQUEST_CODE);
+                        }
+                    });
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+            final AlertDialog alert = builder.create();
+            alert.show();
+
     }
 
 

@@ -1,5 +1,7 @@
 package id.ptechnology.asperda_dan_mitra_kerja.model;
 
+import android.location.Location;
+
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.List;
@@ -18,6 +20,9 @@ public class Constant {
     public static final String PATH_MEMBER_ID="getMember?id_member=5";
     public static final String KEY_PIC_COMPANY="pic_company";
     public static final String URL_PIC_COMPANY="http://www.cekkendaraan.com/asperda_app/assets/uploads/company/";
+    public static final String KEY_JARAK="jarak";
+
+
 
     //keperluan tab produk
     public static final String KEY_NAMA_MOBIL="namaMobil";
@@ -34,6 +39,13 @@ public class Constant {
 
     public static boolean emailGoogleFound;
 
+    public static String emailFacebook;
+    public static String namaFacebook;
+    public static boolean emailFacebookFound;
+
+    public static Location myLokasi;
+
+
 
 
 
@@ -43,6 +55,37 @@ public class Constant {
 
     public static GoogleApiClient mGoogleApiClient;
 
+    public static Location getMyLokasi() {
+        return myLokasi;
+    }
+
+    public static void setMyLokasi(Location myLokasi) {
+        Constant.myLokasi = myLokasi;
+    }
+
+    public static String getEmailFacebook() {
+        return emailFacebook;
+    }
+
+    public static void setEmailFacebook(String emailFacebook) {
+        Constant.emailFacebook = emailFacebook;
+    }
+
+    public static String getNamaFacebook() {
+        return namaFacebook;
+    }
+
+    public static void setNamaFacebook(String namaFacebook) {
+        Constant.namaFacebook = namaFacebook;
+    }
+
+    public static boolean isEmailFacebookFound() {
+        return emailFacebookFound;
+    }
+
+    public static void setEmailFacebookFound(boolean emailFacebookFound) {
+        Constant.emailFacebookFound = emailFacebookFound;
+    }
 
     public static boolean isEmailGoogleFound() {
         return emailGoogleFound;

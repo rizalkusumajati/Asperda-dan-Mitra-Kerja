@@ -15,10 +15,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
+
+import java.util.Arrays;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.login.presenter.LoginPresenter;
@@ -29,6 +32,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefKey;
 import id.ptechnology.asperda_dan_mitra_kerja.registrasi.view.RegistrasiFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +45,7 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
     private Button login;
     private ProgressDialog progressDialog;
     private SignInButton signInButton;
+    private LoginButton loginButton;
     public GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 9001;
     private final String TAG="Google";
@@ -63,6 +68,7 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
         etPassword=(TextInputEditText)view.findViewById(R.id.et_password);
         login=(Button)view.findViewById(R.id.btn_login);
         signInButton=(SignInButton)view.findViewById(R.id.sign_in_button);
+        loginButton=(LoginButton)view.findViewById(R.id.login_button);
 
         signInButton.setSize(SignInButton.SIZE_STANDARD);
       //  signInButton.setScopes(new Scope[]{Plus.SCOPE_PLUS_LOGIN});
@@ -75,7 +81,7 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
         setGooglePlusButtonText(signInButton,getString(R.string.login_google));
 
         //login handle
-
+        //API
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,12 +94,17 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
             }
         });
 
+        //google
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).signInGoogle();
             }
         });
+
+        //facebook
+        ((MainActivity)getActivity()).loginFacebook(loginButton);
+
 
 
         //end login handle

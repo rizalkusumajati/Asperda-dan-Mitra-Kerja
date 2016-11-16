@@ -81,6 +81,7 @@ public class ListDashboardAdapter extends BaseAdapter {
         TextView nama = (TextView) vi.findViewById(R.id.nama);
         TextView tanggal = (TextView) vi.findViewById(R.id.alamat);
         RatingBar ratingBar=(RatingBar)vi.findViewById(R.id.rating);
+        TextView jarak=(TextView)vi.findViewById(R.id.tv_jarak);
         //ImageView logoCompany=(ImageView)vi.findViewById(R.id.iv_logoCompany);
         CircleImageView circleImageView=(CircleImageView)vi.findViewById(R.id.profile_image);
 
@@ -91,6 +92,7 @@ public class ListDashboardAdapter extends BaseAdapter {
         nama.setText(song.get(Constant.KEY_NAMA));
         tanggal.setText(song.get( Constant.KEY_ALAMAT));
         ratingBar.setRating(Float.parseFloat(song.get( Constant.KEY_RATING)));
+        jarak.setText(song.get(Constant.KEY_JARAK));
         Picasso.with(activity).load(Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY)).into(circleImageView);
         Log.e("picasso",Constant.URL_PIC_COMPANY+song.get( Constant.KEY_PIC_COMPANY));
 

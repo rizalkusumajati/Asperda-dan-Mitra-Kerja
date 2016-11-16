@@ -2,8 +2,15 @@ package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +32,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.DetailLi
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabDetailFragmentPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabDetailFragmentPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabDetailFragmentView;
+import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +47,6 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
     private TabDetailFragmentPresenter presenter;
     String logoPerusahaan,namaPerusahaan,  alamatPerusahaan,  kotaPerusahaan, emailPerusahaan,  keteranganPerusahaan;
     private ProgressDialog progressDialog;
-
 
     public TabDetailFragment() {
         // Required empty public constructor
@@ -57,6 +64,8 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
         progressDialog.setMessage("Loading, please wait!");
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
+
+
 
 
         ivLogoPerusahaan=(CircleImageView) view.findViewById(R.id.iv_logoPerusahaan);
@@ -101,4 +110,6 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
         tvEmailPerusahaan.setText(emailPerusahaan);
         tvKeteranganPerusahaan.setText(keteranganPerusahaan);
     }
+
+
 }

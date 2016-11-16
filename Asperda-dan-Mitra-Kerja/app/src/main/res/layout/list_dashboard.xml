@@ -55,6 +55,7 @@ android:layout_weight="1"
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_jarak"
         android:textColor="@color/textBlack"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

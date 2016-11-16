@@ -2,9 +2,16 @@ package id.ptechnology.asperda_dan_mitra_kerja.dashboard.view;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +35,7 @@ import me.relex.circleindicator.CircleIndicator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment implements DashboardView {
+public class DashboardFragment extends Fragment implements DashboardView,LocationListener {
     private ViewPager viewPager;
     private ListView listView,listViewMitra;
     private ListDashboardAdapter adapter, adapterMitra;
@@ -36,9 +43,9 @@ public class DashboardFragment extends Fragment implements DashboardView {
     private DetailListClickFragment detailListClickFragment;
     private ProgressDialog progressDialog;
     private DashboardPresenter presenter;
-    String[] namaPerusahaan= new String[]{"A","B","C"};
-    String[] alamatPerusahaan= new String[]{"D","E","F"};
-    String[] ratingPerusahaan= new String[]{"4","3","2"};
+    private LocationManager manager;
+
+
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -55,6 +62,7 @@ public class DashboardFragment extends Fragment implements DashboardView {
         indicator.setViewPager(mViewPager);
         detailListClickFragment=new DetailListClickFragment();
         presenter=new DashboardPresenterImp(this);
+        manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         progressDialog=new ProgressDialog(getContext());
         progressDialog.setMessage("Loading, please wait!");
@@ -64,8 +72,11 @@ public class DashboardFragment extends Fragment implements DashboardView {
         listView=(ListView)view.findViewById(R.id.listViewAnggota);
         listViewMitra=(ListView)view.findViewById(R.id.listViewMitra);
 
+        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,getActivity(),progressDialog);
+            manager.requestLocationUpdates(manager.GPS_PROVIDER, 0, 300, this);
+
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -114,5 +125,26 @@ public class DashboardFragment extends Fragment implements DashboardView {
     @Override
     public void showToast(String message) {
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.i("onChange","Location change in Dashboard Fragment");
+        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,getActivity(),progressDialog);
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

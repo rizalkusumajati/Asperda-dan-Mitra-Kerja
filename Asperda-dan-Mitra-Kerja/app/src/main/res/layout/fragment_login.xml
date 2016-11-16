@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@android:color/white"
     android:orientation="vertical">
     <ScrollView
@@ -124,20 +125,31 @@
     <com.google.android.gms.common.SignInButton
         android:layout_marginTop="10dp"
         android:id="@+id/sign_in_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"/>
-
-
-
-    <Button
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_facebook"/>
+        android:layout_height="50dp"
+        app:paddingEnd="0dp"
+
+        android:elevation="0dp"
+        android:shadowRadius="0"
+        android:stateListAnimator="@null"
+        android:shadowColor="@android:color/transparent"
+        />
+
+
+    <com.facebook.login.widget.LoginButton
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:elevation="5dp"
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:text="@string/login_facebook"
+        app:login_text="@string/login_facebook"
+        />
+
+
 
 
 

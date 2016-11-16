@@ -1,13 +1,25 @@
 package id.ptechnology.asperda_dan_mitra_kerja.main.view;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -40,9 +56,15 @@ public class MainActivity extends AppCompatActivity
     private ProgressDialog progressDialog;
     private MainPresenter presenter;
     private NavigationView navigationView;
-    private TextView tv_namaPerusahaan,tv_nama;
+    private TextView tv_namaPerusahaan, tv_nama;
     public GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 9001;
+    private CallbackManager callbackManager;
+    private LocationManager manager;
+    private static final int REQUEST_CODE = 0;
+    private LocationListener locationListener;
+    private Location location;
+    private String provider;
 
     @Override
     protected void onStart() {
@@ -55,7 +77,7 @@ public class MainActivity extends AppCompatActivity
             Constant.setmGoogleApiClient(presenter.createGoogleSignIn(googleApiClient, this, this, this));
         }
 
-        presenter.handleOnStart(Constant.getmGoogleApiClient(),this);
+        presenter.handleOnStart(Constant.getmGoogleApiClient(), this);
     }
 
     @Override
@@ -65,22 +87,26 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        presenter=new MainPresenterImp();
-        dashboardFragment=new DashboardFragment();
-        registrasiFragment=new RegistrasiFragment();
-        loginFragment=new LoginFragment();
+        presenter = new MainPresenterImp();
+        dashboardFragment = new DashboardFragment();
+        registrasiFragment = new RegistrasiFragment();
+        loginFragment = new LoginFragment();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         System.out.println("isLogin " + PrefHelper.getBoolean(PrefKey.PREF_LOGIN));
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+        callbackManager = CallbackManager.Factory.create();
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        progressDialog=new ProgressDialog(this);
+
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Authenticating, please wait!");
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
 
 
-
-       // presenter.tryRetrofit();
-        if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)){
+        // presenter.tryRetrofit();
+        if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)) {
             hideItem();
             changeName();
         }
@@ -93,7 +119,46 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        gotoHome();
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        provider = manager.getBestProvider(criteria, true);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+        } else {
+
+            locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    Log.i("LocChange", "on Change location");
+                    Constant.setMyLokasi(location);
+
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            };
+
+            if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                manager.requestLocationUpdates(provider, 0, 300, locationListener);
+
+            }
+            gotoHome();
+        }
 
 
     }
@@ -117,16 +182,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void hideItem()
-    {
+    public void hideItem() {
 
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_login).setVisible(false);
         nav_Menu.findItem(R.id.nav_logout).setVisible(true);
     }
 
-    public void showItem()
-    {
+    public void showItem() {
 
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_logout).setVisible(false);
@@ -140,7 +203,6 @@ public class MainActivity extends AppCompatActivity
 
         return true;
     }
-
 
 
     @Override
@@ -177,15 +239,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
-
-        else if (id == R.id.nav_login) {
+        } else if (id == R.id.nav_login) {
             gotoLogin();
-        }else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             logout();
             //mGoogleApiClient.stopAutoManage(LoginFragment);
-           // mGoogleApiClient.disconnect();
-           // Constant.setmGoogleApiClient(null);
+            // mGoogleApiClient.disconnect();
+            // Constant.setmGoogleApiClient(null);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -193,51 +253,42 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void gotoHome(){
-        getSupportFragmentManager().beginTransaction()
+    public void gotoHome() {
+        presenter.gotoFragment(this, dashboardFragment);
 
-                .replace(R.id.content_main, dashboardFragment)
-                .addToBackStack(null)
-                .commit();
 
     }
 
-    public void gotoLogin(){
-        getSupportFragmentManager().beginTransaction()
+    public void gotoLogin() {
+        presenter.gotoFragment(this, loginFragment);
 
-                .replace(R.id.content_main, loginFragment)
-                .addToBackStack(null)
-                .commit();
 
     }
 
-    public void gotoRegister(){
-        getSupportFragmentManager().beginTransaction()
+    public void gotoRegister() {
+        presenter.gotoFragment(this, registrasiFragment);
 
-                .replace(R.id.content_main, registrasiFragment)
-                .addToBackStack(null)
-                .commit();
     }
 
-    public void changeName(){
-        View header=navigationView.getHeaderView(0);
+    public void changeName() {
+        View header = navigationView.getHeaderView(0);
         /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
-        tv_namaPerusahaan = (TextView)header.findViewById(R.id.tv_namaPerusahaan);
-        tv_nama = (TextView)header.findViewById(R.id.tv_nama);
+        tv_namaPerusahaan = (TextView) header.findViewById(R.id.tv_namaPerusahaan);
+        tv_nama = (TextView) header.findViewById(R.id.tv_nama);
         tv_namaPerusahaan.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN));
         tv_nama.setText(PrefHelper.getString(PrefKey.PREF_LOGIN_NAME));
     }
 
-    public void defaultName(){
-        View header=navigationView.getHeaderView(0);
+    public void defaultName() {
+        View header = navigationView.getHeaderView(0);
         /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
-        tv_namaPerusahaan = (TextView)header.findViewById(R.id.tv_namaPerusahaan);
-        tv_nama = (TextView)header.findViewById(R.id.tv_nama);
+        tv_namaPerusahaan = (TextView) header.findViewById(R.id.tv_namaPerusahaan);
+        tv_nama = (TextView) header.findViewById(R.id.tv_nama);
         tv_namaPerusahaan.setText("Company Name");
         tv_nama.setText("Your Name");
     }
 
-    public void logout(){
+    public void logout() {
 
         presenter.handleLogout(MainActivity.this);
 
@@ -254,10 +305,65 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.handleActivityResult(requestCode,RC_SIGN_IN,data,this);
+        if (requestCode == RC_SIGN_IN)
+            presenter.handleActivityResult(requestCode, RC_SIGN_IN, data, this);
+        else if (requestCode == REQUEST_CODE && resultCode == 0) {
+            String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                gotoHome();
+                Log.v("GPS", " Location providers: " + provider);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                manager.getLastKnownLocation(this.provider);
+                //Start searching for location and update the location text when update available.
+                // Do whatever you want
+
+            }else{
+                buildAlertMessageNoGps();
+                //Users did not switch on the GPS
+            }
+        }
+        else
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void signInGoogle(){
         presenter.signInGoogle(MainActivity.this,Constant.getmGoogleApiClient(),RC_SIGN_IN);
     }
+
+    public void loginFacebook(LoginButton loginButton){
+        presenter.loginFb(loginButton,callbackManager,MainActivity.this);
+    }
+
+
+    public void buildAlertMessageNoGps() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("GPS harus diaktifkan untuk menggunakan aplikasi ini")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(intent, REQUEST_CODE);
+                    }
+                });
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
 }

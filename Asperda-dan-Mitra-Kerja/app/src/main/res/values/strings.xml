@@ -39,6 +39,8 @@
     <string name="belum_member">Belum jadi member? <b>Daftar sekarang</b></string>
     <string name="judul_registrasi">Daftar Rent Car Indonesia</string>
 
+    <string name="facebook_app_id">102466333572783</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>

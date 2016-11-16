@@ -1,9 +1,15 @@
 package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view;
 
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +25,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.DetailListClickPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.DetailListClickPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter.TabDetailFragmentView;
+import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +34,11 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailListClickFragment extends Fragment {
+public class DetailListClickFragment extends Fragment  {
     private ViewPager viewPager;
     private LinearLayout tabDetail,tabProduk,tabLokasi,tabLayout;
     private DetailListClickPresenter presenter;
+
 
     public DetailListClickFragment() {
         // Required empty public constructor
@@ -48,6 +56,7 @@ public class DetailListClickFragment extends Fragment {
         tabDetail=(LinearLayout) tabLayout.findViewById(R.id.tab_detail);
         tabProduk=(LinearLayout) tabLayout.findViewById(R.id.tab_produk);
         tabLokasi=(LinearLayout) tabLayout.findViewById(R.id.tab_lokasi);
+
 //        Bundle bundle = this.getArguments();
 //        int myInt = bundle.getInt(Constant.KEY_ID_COMPANY);
        // presenter=new DetailListClickPresenterImp();
@@ -95,6 +104,8 @@ public class DetailListClickFragment extends Fragment {
 
             }
         });
+
+
 
         setupTab();
         return view;
@@ -145,5 +156,6 @@ public class DetailListClickFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
     }
+
 
 }
