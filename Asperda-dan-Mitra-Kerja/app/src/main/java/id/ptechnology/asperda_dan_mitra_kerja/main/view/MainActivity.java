@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
         presenter = new MainPresenterImp();
         dashboardFragment = new DashboardFragment();
         registrasiFragment = new RegistrasiFragment();
@@ -321,7 +322,8 @@ public class MainActivity extends AppCompatActivity
         else if (requestCode == REQUEST_CODE && resultCode == 0) {
             String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                gotoHome();
+
+
                 Log.v("GPS", " Location providers: " + provider);
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -333,7 +335,10 @@ public class MainActivity extends AppCompatActivity
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                manager.getLastKnownLocation(this.provider);
+
+                    gotoHome();
+//                manager.getLastKnownLocation(this.provider);
+//                gotoHome();
                 //Start searching for location and update the location text when update available.
                 // Do whatever you want
 

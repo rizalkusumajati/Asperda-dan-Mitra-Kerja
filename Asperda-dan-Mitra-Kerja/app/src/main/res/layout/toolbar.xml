@@ -5,4 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
-   />
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/chart"
+            android:layout_alignParentRight="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/shop"/>
+        <TextView
+            android:layout_marginRight="5dp"
+            android:textSize="6dp"
+            android:gravity="center"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/bg_circle"
+            android:layout_alignParentRight="true"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+
+            android:text="1"/>
+
+        <ImageView
+          android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/chart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+
+            android:background="@android:drawable/ic_menu_search"/>
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.Toolbar>

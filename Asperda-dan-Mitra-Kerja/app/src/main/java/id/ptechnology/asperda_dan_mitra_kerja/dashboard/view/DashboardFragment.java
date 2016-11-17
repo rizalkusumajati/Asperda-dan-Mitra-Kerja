@@ -66,7 +66,7 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
         manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading, please wait!");
+        progressDialog.setMessage("Fetching your location, please wait!");
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
 
@@ -79,9 +79,12 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
 
         }
 
-
-        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,getActivity(),progressDialog);
-
+        if (Constant.getMyLokasi()!=null) {
+            presenter.setListView(listDetail, listDetailMitra, adapter, adapterMitra, listView, listViewMitra, getActivity(), progressDialog);
+        }
+        else {
+            progressDialog.show();
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -133,6 +136,8 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
 
     @Override
     public void onLocationChanged(Location location) {
+        Constant.setMyLokasi(location);
+        progressDialog.dismiss();
         Log.i("onChange","Location change in Dashboard Fragment");
         presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,((MainActivity)getActivity()),progressDialog);
     }
