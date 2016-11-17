@@ -29,6 +29,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.dashboard.presenter.DashboardPrese
 import id.ptechnology.asperda_dan_mitra_kerja.dashboard.presenter.DashboardPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.dashboard.presenter.DashboardView;
 import id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view.DetailListClickFragment;
+import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -77,6 +78,9 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
             manager.requestLocationUpdates(manager.GPS_PROVIDER, 0, 300, this);
 
         }
+
+
+        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,getActivity(),progressDialog);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -130,7 +134,7 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
     @Override
     public void onLocationChanged(Location location) {
         Log.i("onChange","Location change in Dashboard Fragment");
-        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,getActivity(),progressDialog);
+        presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,((MainActivity)getActivity()),progressDialog);
     }
 
     @Override

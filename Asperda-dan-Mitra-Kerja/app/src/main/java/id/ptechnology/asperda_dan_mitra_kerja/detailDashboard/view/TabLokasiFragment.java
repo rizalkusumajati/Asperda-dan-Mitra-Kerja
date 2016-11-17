@@ -47,12 +47,18 @@ public class TabLokasiFragment extends Fragment implements TabLokasiView{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_tab_lokasi, container, false);
-        //RAGUNAN = new LatLng(-6.3039, 106.8267);
-        presenter=new TabLokasiFragmentPresenterImp(this);
-        presenter.getCompanyByMember();
-
         FragmentManager fm = this.getChildFragmentManager();
         f = ((SupportMapFragment) fm.findFragmentById(map));
+        //RAGUNAN = new LatLng(-6.3039, 106.8267);
+        presenter=new TabLokasiFragmentPresenterImp(this);
+        if (Constant.getCompanyByMember()==null) {
+            presenter.getCompanyByMember();
+        }
+        else {
+            setMap(Constant.getCompanyByMember().get(0).getLatitudeCompany(),Constant.getCompanyByMember().get(0).getLongitudeCompany(),Constant.getCompanyByMember().get(0).getNamaCompany());
+        }
+
+
 
 
 

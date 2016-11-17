@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -153,7 +154,14 @@ public class DashboardPresenterImp implements DashboardPresenter {
                 companyResponse.setJarak(Constant.getMyLokasi().distanceTo(lokasiPerusahaan));
             }
             List<CompanyResponse>companyResponses=Constant.getCompanyData();
-            Collections.sort(companyResponses, Collections.reverseOrder());
+            Collections.sort(companyResponses, new Comparator<CompanyResponse>() {
+                @Override
+                public int compare(CompanyResponse companyResponse, CompanyResponse t1) {
+
+                    return (int)companyResponse.getJarak()-(int)t1.getJarak();
+                }
+            });
+//            Collections.sort(companyResponses, Collections.reverseOrder());
         //    Comparator<Double> compareDouble = (companyResponses.get(0).getJarak());
             //Collections.sort(companyResponses);
           //  Collections.sort(List<CompanyResponse> list, Comparator<CompanyResponse> companyResponses.)
@@ -168,10 +176,10 @@ public class DashboardPresenterImp implements DashboardPresenter {
                 map.put(Constant.KEY_PIC_COMPANY, companyResponse.getPicCompany());
                 String jarak="";
                 if (companyResponse.getJarak()>=1000){
-                    jarak=Double.toString(Math.floor(companyResponse.getJarak()/1000))+" km";
+                    jarak=(Math.floor(companyResponse.getJarak()/1000))+" km";
                 }
                 else {
-                    jarak=Double.toString(Math.floor(companyResponse.getJarak()))+" m";
+                    jarak=(Math.floor(companyResponse.getJarak()))+" m";
                 }
 
                 map.put(Constant.KEY_JARAK,jarak);

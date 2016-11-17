@@ -3,11 +3,13 @@ package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +46,11 @@ import retrofit2.Response;
  */
 public class TabDetailFragment extends Fragment implements TabDetailFragmentView {
     private CircleImageView ivLogoPerusahaan;
-    private TextView tvNamaPerusahaan,tvAlamatPerusahaan,tvKotaPerusahaan,tvEmailPerusahaan,tvKeteranganPerusahaan;
+    private TextView tvNamaPerusahaan,tvAlamatPerusahaan,tvKotaPerusahaan,tvEmailPerusahaan,tvKeteranganPerusahaan,tvJarak;
     private TabDetailFragmentPresenter presenter;
     String logoPerusahaan,namaPerusahaan,  alamatPerusahaan,  kotaPerusahaan, emailPerusahaan,  keteranganPerusahaan;
     private ProgressDialog progressDialog;
+    private LinearLayout btnHubungi;
 
     public TabDetailFragment() {
         // Required empty public constructor
@@ -74,16 +78,32 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
         tvKotaPerusahaan=(TextView)view.findViewById(R.id.tv_kotaPerusahaan);
         tvEmailPerusahaan=(TextView)view.findViewById(R.id.tv_emailPerusahaan);
         tvKeteranganPerusahaan=(TextView)view.findViewById(R.id.tv_keteranganPerusahaan);
+        tvJarak=(TextView)view.findViewById(R.id.tv_jarak);
+        btnHubungi=(LinearLayout)view.findViewById(R.id.btn_hubungi);
 
         presenter=new TabDetailFragmentPresenterImp(this);
 
 
-        if (Constant.getCompanyByMember()==null)
-        presenter.getCompanyByMember(progressDialog);
-        else
-        setData(Constant.getCompanyByMember().get(0).getPicCompany(),Constant.getCompanyByMember().get(0).getNamaCompany(),Constant.getCompanyByMember().get(0).getAlamatCompany(),Constant.getCompanyByMember().get(0).getKotacompany(),Constant.getCompanyByMember().get(0).getEmailCompany(),Constant.getCompanyByMember().get(0).getKetCompany());
+        if (Constant.getCompanyByMember()==null) {
+            Log.i("Detail","on Detail Null");
+            presenter.getCompanyByMember(progressDialog);
+        }
+        else {
 
+            String nomorHp="";
+            if (Constant.getCompanyByMember().get(0).getTlp1Company()!=null){
+                nomorHp=Constant.getCompanyByMember().get(0).getTlp1Company();
+            }
+            else if (Constant.getCompanyByMember().get(0).getTlp2Company()!=null){
+                nomorHp=Constant.getCompanyByMember().get(0).getTlp2Company();
+            }
+            else {
+                nomorHp="unavailable";
+            }
+            Log.i("Detail","on Detail not Null"+Constant.getCompanyByMember().get(0).getJarak());
+            setData(Constant.getCompanyByMember().get(0).getPicCompany(), Constant.getCompanyByMember().get(0).getNamaCompany(), Constant.getCompanyByMember().get(0).getAlamatCompany(), Constant.getCompanyByMember().get(0).getKotacompany(), Constant.getCompanyByMember().get(0).getEmailCompany(), Constant.getCompanyByMember().get(0).getKetCompany(), Constant.getCompanyByMember().get(0).getJarak(),nomorHp);
 
+        }
 
 
 
@@ -94,7 +114,7 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
     }
 
     @Override
-    public void setData(String logoPerusahaan, String namaPerusahaan, String alamatPerusahaan, String kotaPerusahaan, String emailPerusahaan, String keteranganPerusahaan) {
+    public void setData(String logoPerusahaan, String namaPerusahaan, String alamatPerusahaan, String kotaPerusahaan, String emailPerusahaan, String keteranganPerusahaan, final Double jarak, final String nomorHp) {
 //        this.logoPerusahaan=logoPerusahaan;
 //        this.namaPerusahaan=namaPerusahaan;
 //        this.alamatPerusahaan=alamatPerusahaan;
@@ -109,6 +129,30 @@ public class TabDetailFragment extends Fragment implements TabDetailFragmentView
         tvKotaPerusahaan.setText(kotaPerusahaan);
         tvEmailPerusahaan.setText(emailPerusahaan);
         tvKeteranganPerusahaan.setText(keteranganPerusahaan);
+        if (jarak>=1000){
+            tvJarak.setText(""+Double.toString(Math.floor(jarak/1000))+" km");
+        }
+        else {
+            tvJarak.setText(""+Double.toString(Math.floor(jarak))+" m");
+        }
+
+        btnHubungi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nomorHp.equals("unavailable")){
+                    Toast.makeText(getContext(),"Untuk saat ini nomor belum tersedia",Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", nomorHp, null));
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+
+
     }
 
 

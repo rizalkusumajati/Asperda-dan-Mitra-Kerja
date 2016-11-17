@@ -28,7 +28,7 @@ public class ProdukResponse {
     private String hargaProduct;
     @SerializedName("pic_product")
     @Expose
-    private Object picProduct;
+    private String picProduct;
 
     /**
      *
@@ -125,7 +125,7 @@ public class ProdukResponse {
      * @return
      * The picProduct
      */
-    public Object getPicProduct() {
+    public String getPicProduct() {
         return picProduct;
     }
 
@@ -134,7 +134,7 @@ public class ProdukResponse {
      * @param picProduct
      * The pic_product
      */
-    public void setPicProduct(Object picProduct) {
+    public void setPicProduct(String picProduct) {
         this.picProduct = picProduct;
     }
 

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
     private DashboardFragment dashboardFragment;
     private LoginFragment loginFragment;
     private RegistrasiFragment registrasiFragment;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog,progressDialog1;
     private MainPresenter presenter;
     private NavigationView navigationView;
     private TextView tv_namaPerusahaan, tv_nama;
@@ -104,6 +104,11 @@ public class MainActivity extends AppCompatActivity
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
 
+        progressDialog1 = new ProgressDialog(this);
+        progressDialog1.setMessage("Fetching location, please wait!");
+        progressDialog1.setIndeterminate(false);
+        progressDialog1.setCancelable(false);
+
 
         // presenter.tryRetrofit();
         if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)) {
@@ -133,6 +138,8 @@ public class MainActivity extends AppCompatActivity
                 public void onLocationChanged(Location location) {
                     Log.i("LocChange", "on Change location");
                     Constant.setMyLokasi(location);
+                    progressDialog1.dismiss();
+                    gotoHome();
 
                 }
 
@@ -157,6 +164,10 @@ public class MainActivity extends AppCompatActivity
                 manager.requestLocationUpdates(provider, 0, 300, locationListener);
 
             }
+            if (Constant.getMyLokasi()==null){
+                progressDialog1.show();
+            }
+            else
             gotoHome();
         }
 

@@ -5,5 +5,5 @@ package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter;
  */
 
 public interface TabDetailFragmentView {
-    void setData(String logoPerusahaan,String namaPerusahaan,String alamatPerusahaan,String kotaPerusahaan,String emailPerusahaan,String keteranganPerusahaan);
+    void setData(String logoPerusahaan,String namaPerusahaan,String alamatPerusahaan,String kotaPerusahaan,String emailPerusahaan,String keteranganPerusahaan,Double jarak,String nomorHp);
 }

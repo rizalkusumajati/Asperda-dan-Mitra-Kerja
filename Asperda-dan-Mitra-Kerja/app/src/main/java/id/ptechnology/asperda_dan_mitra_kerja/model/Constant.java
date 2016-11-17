@@ -24,6 +24,7 @@ public class Constant {
 
 
 
+
     //keperluan tab produk
     public static final String KEY_NAMA_MOBIL="namaMobil";
     public static final String KEY_NAMA_KETERANGAN="namaMobilKeterangan";
@@ -31,6 +32,7 @@ public class Constant {
     public static final String KEY_SOPIR_MOBIL="sopirMobil";
     public static final String KEY_BBM_MOBIL="bbmMobil";
     public static final String KEY_HARGA_MOBIL="hargaMobil";
+    public static final String KEY_FOTO_MOBIL="foto";
 
     //end keperluan tab produk
 

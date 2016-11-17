@@ -29,12 +29,24 @@ public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter
             public void onResponse(Call<List<ProdukResponse>> call, Response<List<ProdukResponse>> response) {
                 Log.i("InCompany",""+response.code());
                 if (response.code()==200){
-                    List<ProdukResponse> produkResponses=response.body();
+                    if (response.body().size()!=0) {
+                        List<ProdukResponse> produkResponses = response.body();
 
-                    Constant.setProdukBymember(produkResponses);
-                    Log.i("CompanyMemberParent",Constant.getProdukBymember().get(0).getNamaProduct());
+                        Constant.setProdukBymember(produkResponses);
+                        Log.i("CompanyMemberParent", Constant.getProdukBymember().get(0).getNamaProduct());
 
-                    setListView(listDetail,adapter,listView,activity);
+                        setListView(listDetail, adapter, listView, activity);
+                    }
+
+                    else {
+                        List<ProdukResponse> produkResponses = new ArrayList<ProdukResponse>();
+                        ProdukResponse produkResponse=new ProdukResponse();
+                        produkResponse.setKetProduct("Belum ada Produk yang dimasukkan");
+                        produkResponses.add(produkResponse);
+                        Constant.setProdukBymember(produkResponses);
+                        setListView(listDetail, adapter, listView, activity);
+
+                    }
 
                 }
             }
@@ -65,9 +77,10 @@ public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter
 
                 map.put(Constant.KEY_NAMA_MOBIL, produkResponse.getNamaProduct());
                 map.put(Constant.KEY_LOKASI_MOBIL,produkResponse.getKetProduct());
+                map.put(Constant.KEY_FOTO_MOBIL,produkResponse.getPicProduct());
                 //map.put(Constant.KEY_SOPIR_MOBIL,produkResponse.getKetProduct());
                // map.put(Constant.KEY_BBM_MOBIL,produkResponse.getKetProduct());
-               // map.put(Constant.KEY_HARGA_MOBIL,produkResponse.getHargaProduct());
+                map.put(Constant.KEY_HARGA_MOBIL,produkResponse.getHargaProduct());
 
 
                 adapter.addItem(map);
