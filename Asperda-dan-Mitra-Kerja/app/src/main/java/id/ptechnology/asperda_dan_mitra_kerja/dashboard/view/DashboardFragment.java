@@ -1,13 +1,18 @@
 package id.ptechnology.asperda_dan_mitra_kerja.dashboard.view;
 
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -18,6 +23,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +43,13 @@ import id.ptechnology.asperda_dan_mitra_kerja.main.view.MainActivity;
 import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import me.relex.circleindicator.CircleIndicator;
 
+import static id.ptechnology.asperda_dan_mitra_kerja.model.Constant.mGoogleApiClient;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment implements DashboardView,LocationListener {
+public class DashboardFragment extends Fragment implements DashboardView,GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
+        com.google.android.gms.location.LocationListener {
     private ViewPager viewPager;
     private ListView listView,listViewMitra;
     private ListDashboardAdapter adapter, adapterMitra;
@@ -45,8 +58,8 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
     private ProgressDialog progressDialog;
     private DashboardPresenter presenter;
     private LocationManager manager;
-
-
+    private String provider;
+    LocationRequest mLocationRequest;
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -72,19 +85,23 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
 
         listView=(ListView)view.findViewById(R.id.listViewAnggota);
         listViewMitra=(ListView)view.findViewById(R.id.listViewMitra);
-
-        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-            manager.requestLocationUpdates(manager.GPS_PROVIDER, 0, 300, this);
-
-        }
-
-        if (Constant.getMyLokasi()!=null) {
-            presenter.setListView(listDetail, listDetailMitra, adapter, adapterMitra, listView, listViewMitra, getActivity(), progressDialog);
-        }
-        else {
-            progressDialog.show();
-        }
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+        provider = manager.getBestProvider(criteria, true);
+        progressDialog.show();
+       if (Constant.getMyLokasi()!=null) {
+            setListViewData();
+       }
+       else {
+            Log.i("LocChange","Dashboard null lokasi");
+//           mGoogleApiClient.connect();
+//           Constant.getmGoogleApiClient().connect();
+//          progressDialog.show();
+       }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -112,6 +129,11 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
         return view;
     }
 
+    public void setListViewData(){
+
+        presenter.setListView(listDetail, listDetailMitra, adapter, adapterMitra, listView, listViewMitra, getActivity(), progressDialog);
+    }
+
 
 
 
@@ -137,23 +159,40 @@ public class DashboardFragment extends Fragment implements DashboardView,Locatio
     @Override
     public void onLocationChanged(Location location) {
         Constant.setMyLokasi(location);
-        progressDialog.dismiss();
+      //  progressDialog.dismiss();
         Log.i("onChange","Location change in Dashboard Fragment");
         presenter.setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,((MainActivity)getActivity()),progressDialog);
     }
 
+
+
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.i("GoogleApi","dashboard connect");
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(1000); // Update location every second
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 
     @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

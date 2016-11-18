@@ -29,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationServices;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -109,7 +110,7 @@ public class MainPresenterImp implements MainPresenter {
     }
 
     @Override
-    public GoogleApiClient createGoogleSignIn(GoogleApiClient mGoogleApiClient, Context context, FragmentActivity fragmentActivity, GoogleApiClient.OnConnectionFailedListener connectionFailedListener) {
+    public GoogleApiClient createGoogleSignIn(GoogleApiClient mGoogleApiClient, Context context, FragmentActivity fragmentActivity, GoogleApiClient.OnConnectionFailedListener connectionFailedListener, GoogleApiClient.ConnectionCallbacks connectionCallbacks) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -117,8 +118,11 @@ public class MainPresenterImp implements MainPresenter {
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .enableAutoManage(fragmentActivity /* FragmentActivity */, connectionFailedListener /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(connectionCallbacks)
                 .build();
-        Constant.mGoogleApiClient=mGoogleApiClient;
+        Constant.setmGoogleApiClient(mGoogleApiClient);
+        //Constant.mGoogleApiClient=mGoogleApiClient;
         return mGoogleApiClient;
     }
 

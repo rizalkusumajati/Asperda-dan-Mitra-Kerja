@@ -28,7 +28,7 @@ public interface MainPresenter {
     void tryRetrofit();
     void handleLogout(Activity activity);
     void gotoFragment(MainActivity activity, Fragment fragment);
-    GoogleApiClient createGoogleSignIn(GoogleApiClient mGoogleApiClient, Context context, FragmentActivity fragmentActivity, GoogleApiClient.OnConnectionFailedListener connectionFailedListener);
+    GoogleApiClient createGoogleSignIn(GoogleApiClient mGoogleApiClient, Context context, FragmentActivity fragmentActivity, GoogleApiClient.OnConnectionFailedListener connectionFailedListener, GoogleApiClient.ConnectionCallbacks connectionCallbacks);
     void signInGoogle(Activity activity, GoogleApiClient mGoogleApiClient, int RC_SIGN_IN);
     void logout(GoogleApiClient mGoogleApiClient, Activity activity);
     void handleOnStart(GoogleApiClient mGoogleApiClient, final Activity activity);

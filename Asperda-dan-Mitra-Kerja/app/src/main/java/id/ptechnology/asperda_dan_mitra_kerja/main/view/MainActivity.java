@@ -8,11 +8,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -34,9 +34,11 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
-import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.R;
+import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenterImp;
@@ -49,11 +51,12 @@ import static id.ptechnology.asperda_dan_mitra_kerja.model.Constant.mGoogleApiCl
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
-    private DashboardFragment dashboardFragment;
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
+        com.google.android.gms.location.LocationListener {
+    private DashboardFragment dashboardFragment,fragment;
     private LoginFragment loginFragment;
     private RegistrasiFragment registrasiFragment;
-    private ProgressDialog progressDialog,progressDialog1;
+    private ProgressDialog progressDialog, progressDialog1;
     private MainPresenter presenter;
     private NavigationView navigationView;
     private TextView tv_namaPerusahaan, tv_nama;
@@ -62,22 +65,26 @@ public class MainActivity extends AppCompatActivity
     private CallbackManager callbackManager;
     private LocationManager manager;
     private static final int REQUEST_CODE = 0;
-    private LocationListener locationListener;
+    // private LocationListener locationListener;
     private Location location;
     private String provider;
+
+    LocationRequest mLocationRequest;
+    //GoogleApiClient mLocationClient;
+    Location mCurrentLocation;
 
     @Override
     protected void onStart() {
         super.onStart();
-
         if (Constant.getmGoogleApiClient() != null)
             Constant.getmGoogleApiClient().connect();
         else {
 
-            Constant.setmGoogleApiClient(presenter.createGoogleSignIn(googleApiClient, this, this, this));
+            Constant.setmGoogleApiClient(presenter.createGoogleSignIn(googleApiClient, this, this, this,this));
         }
 
         presenter.handleOnStart(Constant.getmGoogleApiClient(), this);
+    //    mGoogleApiClient.connect();
     }
 
     @Override
@@ -117,6 +124,8 @@ public class MainActivity extends AppCompatActivity
             changeName();
         }
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -128,47 +137,17 @@ public class MainActivity extends AppCompatActivity
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+
         provider = manager.getBestProvider(criteria, true);
 
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         } else {
-
-            locationListener = new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    Log.i("LocChange", "on Change location");
-                    Constant.setMyLokasi(location);
-                    progressDialog1.dismiss();
-                    gotoHome();
-
-                }
-
-                @Override
-                public void onStatusChanged(String s, int i, Bundle bundle) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String s) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String s) {
-
-                }
-            };
-
-            if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-                manager.requestLocationUpdates(provider, 0, 300, locationListener);
-
-            }
-            if (Constant.getMyLokasi()==null){
-                progressDialog1.show();
-            }
-            else
+            Log.i("LocChange", "else condition");
             gotoHome();
         }
 
@@ -324,39 +303,27 @@ public class MainActivity extends AppCompatActivity
             if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
 
-                Log.v("GPS", " Location providers: " + provider);
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
 
-                    gotoHome();
+                gotoHome();
 //                manager.getLastKnownLocation(this.provider);
 //                gotoHome();
                 //Start searching for location and update the location text when update available.
                 // Do whatever you want
 
-            }else{
+            } else {
                 buildAlertMessageNoGps();
                 //Users did not switch on the GPS
             }
-        }
-        else
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        } else
+            callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void signInGoogle(){
-        presenter.signInGoogle(MainActivity.this,Constant.getmGoogleApiClient(),RC_SIGN_IN);
+    public void signInGoogle() {
+        presenter.signInGoogle(MainActivity.this, Constant.getmGoogleApiClient(), RC_SIGN_IN);
     }
 
-    public void loginFacebook(LoginButton loginButton){
-        presenter.loginFb(loginButton,callbackManager,MainActivity.this);
+    public void loginFacebook(LoginButton loginButton) {
+        presenter.loginFb(loginButton, callbackManager, MainActivity.this);
     }
 
 
@@ -382,4 +349,49 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.i("Google","OnLocationchange");
+        Constant.setMyLokasi(location);
+
+        if (fragment!=null){
+
+            if (fragment.isVisible()) {
+                fragment.setListViewData();
+            }
+        }
+
+        //  progressDialog1.dismiss();
+       // gotoHome();
+    }
+
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+       // progressDialog1.show();
+        fragment= (DashboardFragment) getSupportFragmentManager().findFragmentById(R.id.content_main);
+        Log.i("GoogleApi","connected");
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(1000); // Update location every second
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
 }

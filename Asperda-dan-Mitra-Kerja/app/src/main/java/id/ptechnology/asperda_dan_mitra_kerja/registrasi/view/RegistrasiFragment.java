@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,14 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
         presenter=new RegisterPresenterImp(this);
         loginFragment=new LoginFragment();
 
-        if (!Constant.isEmailGoogleFound()){
+        Log.i("signIN",""+Constant.isEmailGoogleFound());
+
+        if (Constant.isEmailGoogleFound()){
+            etEmail.setText(Constant.getEmailGoogle());
+            etNama.setText(Constant.getNamaGoogle());
+        }
+        else {
+            Log.i("EmailGo",Constant.getEmailGoogle());
             etEmail.setText(Constant.getEmailGoogle());
             etNama.setText(Constant.getNamaGoogle());
         }

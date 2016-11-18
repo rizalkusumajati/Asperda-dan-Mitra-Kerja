@@ -41,11 +41,12 @@ android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="alamat"/>
         <RatingBar
-            android:progressDrawable="@drawable/ratingbar"
+
             style="?android:attr/ratingBarStyleSmall"
             android:id="@+id/rating"
             android:rating="2"
-
+            android:progressTint="@color/colorPrimary"
+            android:secondaryProgressTint="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -55,6 +56,7 @@ android:layout_weight="1"
     </LinearLayout>
 
     <TextView
+
         android:id="@+id/tv_jarak"
         android:textColor="@color/textBlack"
         android:layout_marginLeft="10dp"

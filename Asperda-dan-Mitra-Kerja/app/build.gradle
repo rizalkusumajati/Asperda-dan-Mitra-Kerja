@@ -33,21 +33,18 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'me.relex:circleindicator:1.2.2@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     // Retrofit & OkHttp
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
-
     //login g+
     compile 'com.google.android.gms:play-services-auth:9.8.0'
-
     //login fb
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
-
     //gcm
-    compile "com.google.android.gms:play-services-gcm:9.8.0"
+    compile 'com.google.android.gms:play-services-gcm:9.8.0'
 
+    //LOCATION
+    compile 'com.google.android.gms:play-services-location:9.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

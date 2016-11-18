@@ -45,11 +45,11 @@ public class DashboardPresenterImp implements DashboardPresenter {
 
     @Override
     public void getCompanyList(final ArrayList<HashMap<String, String>> listDetail, final ArrayList<HashMap<String, String>> listDetailMitra, final ListDashboardAdapter adapter, final ListDashboardAdapter adapterMitra, final ListView listView, final ListView listViewMitra, final Activity activity, final ProgressDialog progressDialog){
-        progressDialog.show();
+       // progressDialog.show();
         new ServiceGenerator().getCompany(new Callback<List<CompanyResponse>>() {
             @Override
             public void onResponse(Call<List<CompanyResponse>> call, Response<List<CompanyResponse>> response) {
-               progressDialog.dismiss();
+              // progressDialog.dismiss();
                 System.out.println("Response code: "+ response.code());
                 if (response.code()==200) {
 
@@ -80,6 +80,7 @@ public class DashboardPresenterImp implements DashboardPresenter {
                     setListView(listDetail,listDetailMitra,adapter,adapterMitra,listView,listViewMitra,activity,progressDialog);
                 }
                 else {
+                    progressDialog.dismiss();
                     dashboardView.showToast(response.message());
                 }
             }
@@ -233,7 +234,7 @@ public class DashboardPresenterImp implements DashboardPresenter {
         }
 
 
-
+        progressDialog.dismiss();
     }
 
     @Override
