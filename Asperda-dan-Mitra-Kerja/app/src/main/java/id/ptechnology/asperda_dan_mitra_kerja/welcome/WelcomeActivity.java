@@ -1,5 +1,8 @@
 package id.ptechnology.asperda_dan_mitra_kerja.welcome;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -35,7 +38,8 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_SMS, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
+        int PERMISSION_ALL = 1;
         // Checking for first time launch - before calling setContentView()
       //  prefManager = new PrefManager(this);
         if (PrefHelper.getBoolean(PrefKey.PREF_NAME)) {
@@ -43,9 +47,19 @@ public class WelcomeActivity extends AppCompatActivity {
             finish();
         }
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (!hasPermissions(this, PERMISSIONS)) {
+
+                ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+
+            }
+        }
+
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
         setContentView(R.layout.activity_welcome);
@@ -203,5 +217,16 @@ public class WelcomeActivity extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

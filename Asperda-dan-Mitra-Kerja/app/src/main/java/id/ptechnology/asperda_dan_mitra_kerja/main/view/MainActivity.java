@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -36,6 +38,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
@@ -69,9 +74,19 @@ public class MainActivity extends AppCompatActivity
     private Location location;
     private String provider;
 
+
     LocationRequest mLocationRequest;
     //GoogleApiClient mLocationClient;
     Location mCurrentLocation;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        gotoHome();
+    }
 
     @Override
     protected void onStart() {
@@ -117,8 +132,7 @@ public class MainActivity extends AppCompatActivity
         progressDialog1.setIndeterminate(false);
         progressDialog1.setCancelable(false);
 
-
-        // presenter.tryRetrofit();
+       // presenter.tryRetrofit();
         if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)) {
             hideItem();
             changeName();
@@ -146,10 +160,16 @@ public class MainActivity extends AppCompatActivity
 
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
-        } else {
-            Log.i("LocChange", "else condition");
-            gotoHome();
         }
+            else {
+                Log.i("LocChange", "else condition");
+                gotoHome();
+            }
+
+
+
+
+
 
 
     }
@@ -245,6 +265,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void gotoHome() {
+        Constant.setOnDashboard(true);
         presenter.gotoFragment(this, dashboardFragment);
 
 
@@ -314,9 +335,14 @@ public class MainActivity extends AppCompatActivity
                 buildAlertMessageNoGps();
                 //Users did not switch on the GPS
             }
-        } else
+        }else{
             callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        }
+
     }
+
+
 
     public void signInGoogle() {
         presenter.signInGoogle(MainActivity.this, Constant.getmGoogleApiClient(), RC_SIGN_IN);
@@ -324,6 +350,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loginFacebook(LoginButton loginButton) {
         presenter.loginFb(loginButton, callbackManager, MainActivity.this);
+
     }
 
 
@@ -370,7 +397,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onConnected(@Nullable Bundle bundle) {
        // progressDialog1.show();
-        fragment= (DashboardFragment) getSupportFragmentManager().findFragmentById(R.id.content_main);
+        if (Constant.onDashboard) {
+            fragment = (DashboardFragment) getSupportFragmentManager().findFragmentById(R.id.content_main);
+        }
         Log.i("GoogleApi","connected");
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -394,4 +423,9 @@ public class MainActivity extends AppCompatActivity
     public void onConnectionSuspended(int i) {
 
     }
+
+
+
+
+
 }

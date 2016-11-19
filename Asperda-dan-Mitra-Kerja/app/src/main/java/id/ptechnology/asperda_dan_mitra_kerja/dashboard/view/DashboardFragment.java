@@ -105,6 +105,7 @@ public class DashboardFragment extends Fragment implements DashboardView,GoogleA
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Constant.setOnDashboard(false);
 
                     Constant.setIdCompany(presenter.getIdCompany(i));
                     Constant.setProdukBymember(null);
@@ -117,7 +118,7 @@ public class DashboardFragment extends Fragment implements DashboardView,GoogleA
         listViewMitra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Constant.setOnDashboard(false);
                 Constant.setIdCompany(presenter.getIdMitra(i));
                 Constant.setProdukBymember(null);
                 Constant.setCompanyByMember(null);
@@ -194,5 +195,16 @@ public class DashboardFragment extends Fragment implements DashboardView,GoogleA
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            Constant.setOnDashboard(true);
+        }
+        else {
+            Constant.setOnDashboard(false);
+        }
     }
 }

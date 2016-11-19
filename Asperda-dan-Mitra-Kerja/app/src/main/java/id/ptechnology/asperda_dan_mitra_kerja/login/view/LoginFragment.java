@@ -69,6 +69,7 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
         login=(Button)view.findViewById(R.id.btn_login);
         signInButton=(SignInButton)view.findViewById(R.id.sign_in_button);
         loginButton=(LoginButton)view.findViewById(R.id.login_button);
+        Constant.setOnDashboard(false);
 
         signInButton.setSize(SignInButton.SIZE_STANDARD);
       //  signInButton.setScopes(new Scope[]{Plus.SCOPE_PLUS_LOGIN});
@@ -115,6 +116,9 @@ public class LoginFragment extends Fragment implements LoginView, GoogleApiClien
         registrasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (Constant.getLoginIntegrate()!=null){
+                    Constant.setLoginIntegrate(null);
+                }
                 presenter.gotoRegistrasi(LoginFragment.this,registrasiFragment);
             }
         });

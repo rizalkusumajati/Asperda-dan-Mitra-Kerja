@@ -47,8 +47,8 @@ public class Constant {
 
     public static Location myLokasi;
 
-
-
+    public static boolean onDashboard;
+    public static String loginIntegrate;
 
 
     public static final String KEY_ID_COMPANY="id_company";
@@ -56,6 +56,22 @@ public class Constant {
     public static List<ProdukResponse>produkBymember;
 
     public static GoogleApiClient mGoogleApiClient;
+
+    public static String getLoginIntegrate() {
+        return loginIntegrate;
+    }
+
+    public static void setLoginIntegrate(String loginIntegrate) {
+        Constant.loginIntegrate = loginIntegrate;
+    }
+
+    public static boolean isOnDashboard() {
+        return onDashboard;
+    }
+
+    public static void setOnDashboard(boolean onDashboard) {
+        Constant.onDashboard = onDashboard;
+    }
 
     public static Location getMyLokasi() {
         return myLokasi;

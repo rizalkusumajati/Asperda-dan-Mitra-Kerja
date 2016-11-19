@@ -27,6 +27,7 @@ import id.ptechnology.asperda_dan_mitra_kerja.registrasi.presenter.RegisterView;
 public class RegistrasiFragment extends Fragment implements RegisterView {
     private TextInputEditText etNama,etEmail,etAlamat,etNomor,etNamaPerusahaan,etPassword,etInputUlang;
     private Button btnDaftar;
+
     private RegisterPresenter presenter;
     private ProgressDialog progressDialog;
     private LoginFragment loginFragment;
@@ -61,22 +62,25 @@ public class RegistrasiFragment extends Fragment implements RegisterView {
         presenter=new RegisterPresenterImp(this);
         loginFragment=new LoginFragment();
 
-        Log.i("signIN",""+Constant.isEmailGoogleFound());
 
-        if (Constant.isEmailGoogleFound()){
-            etEmail.setText(Constant.getEmailGoogle());
-            etNama.setText(Constant.getNamaGoogle());
-        }
-        else {
-            Log.i("EmailGo",Constant.getEmailGoogle());
-            etEmail.setText(Constant.getEmailGoogle());
-            etNama.setText(Constant.getNamaGoogle());
+        if (Constant.getLoginIntegrate()!=null){
+            if (Constant.getLoginIntegrate().equals("google")){
+                etEmail.setText(Constant.getEmailGoogle());
+                etEmail.setFocusable(false);
+                etEmail.setFocusableInTouchMode(false);
+                etEmail.setClickable(false);
+                etNama.setText(Constant.getNamaGoogle());
+
+            }
+            else if(Constant.getLoginIntegrate().equals("facebook")){
+                etEmail.setText(Constant.getEmailFacebook());
+                etEmail.setFocusable(false);
+                etEmail.setFocusableInTouchMode(false);
+                etEmail.setClickable(false);
+                etNama.setText(Constant.getNamaFacebook());
+            }
         }
 
-        if (!Constant.isEmailFacebookFound()){
-            etEmail.setText(Constant.getEmailFacebook());
-            etNama.setText(Constant.getNamaFacebook());
-        }
 
         this.arraySpinner = new String[] {
                 "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"

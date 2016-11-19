@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -250,8 +251,9 @@ public class MainPresenterImp implements MainPresenter {
                         ((MainActivity)activity).gotoHome();
                     }
                     else {
-
+                        //Constant.setOnDashboard(false);
                         Constant.setEmailGoogleFound(false);
+                        Constant.setLoginIntegrate("google");
                         logout(Constant.getmGoogleApiClient(),activity);
                         ((MainActivity)activity).gotoRegister();
 
@@ -284,15 +286,18 @@ public class MainPresenterImp implements MainPresenter {
                                 Log.v("LoginActivity", response.toString());
 
                                 // Application code
+
                                 Bundle bFacebookData = getFacebookData(object);
-                                System.out.println("Email Fb : "+bFacebookData.getString("email"));
+                                System.out.println("Email Fb : "+response.getRawResponse());
+                                System.out.println("name Fb : "+bFacebookData.getString("name"));
 
                                 Constant.setEmailFacebook(bFacebookData.getString("email"));
                                 Constant.setNamaFacebook(bFacebookData.getString("name"));
-                                getMemberByFb(activity);
 
+                                getMemberByFb(activity);
                             }
                         });
+
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender");
                 request.setParameters(parameters);
@@ -309,6 +314,10 @@ public class MainPresenterImp implements MainPresenter {
                         + "\n" +
                         "Name"
                         +loginResult.getAccessToken().getToken());
+
+
+
+
             }
 
             @Override
@@ -350,6 +359,8 @@ public class MainPresenterImp implements MainPresenter {
                 bundle.putString("gender", object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("name"))
+                bundle.putString("name", object.getString("name"));
             if (object.has("location"))
                 bundle.putString("location", object.getJSONObject("location").getString("name"));
 
@@ -369,6 +380,7 @@ public class MainPresenterImp implements MainPresenter {
             public void onResponse(Call<List<MemberResponse>> call, Response<List<MemberResponse>> response) {
                 //  progressDialog.dismiss();
                 if (response.code()==200){
+                    Toast.makeText(activity,"Someting wrong with Fb, can't login",Toast.LENGTH_SHORT);
                     if (response.body().size()!=0){
 
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
@@ -383,12 +395,16 @@ public class MainPresenterImp implements MainPresenter {
                         ((MainActivity)activity).gotoHome();
                     }
                     else {
-
+                        Constant.setLoginIntegrate("facebook");
                         Constant.setEmailFacebookFound(false);
                         LoginManager.getInstance().logOut();
                         ((MainActivity)activity).gotoRegister();
 
                     }
+                }
+                else {
+                    LoginManager.getInstance().logOut();
+                    Toast.makeText(activity,"Someting wrong with Fb, can't login",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -396,6 +412,7 @@ public class MainPresenterImp implements MainPresenter {
             public void onFailure(Call<List<MemberResponse>> call, Throwable t) {
                 //   progressDialog.dismiss();
 
+                Toast.makeText(activity,"Someting wrong with Facebook, can't login",Toast.LENGTH_SHORT).show();
 
             }
         });
