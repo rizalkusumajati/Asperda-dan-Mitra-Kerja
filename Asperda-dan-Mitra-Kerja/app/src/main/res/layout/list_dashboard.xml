@@ -41,12 +41,15 @@ android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="alamat"/>
         <RatingBar
-
-            style="?android:attr/ratingBarStyleSmall"
+           android:layout_marginLeft="-20dp"
+            android:scaleY="0.5"
+            android:scaleX="0.5"
+            style="@style/CustomRatingBar"
             android:id="@+id/rating"
             android:rating="2"
-            android:progressTint="@color/colorPrimary"
-            android:secondaryProgressTint="@color/colorPrimary"
+            android:clickable="false"
+            android:isIndicator="true"
+            android:focusable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

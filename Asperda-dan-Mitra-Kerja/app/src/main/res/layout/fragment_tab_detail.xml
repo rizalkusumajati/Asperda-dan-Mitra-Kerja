@@ -57,12 +57,14 @@
                         android:textColor="@color/colorPrimary"
                         android:text="Nama Perushaan "/>
                     <RatingBar
-                        style="?android:attr/ratingBarStyleSmall"
+                        style="@style/CustomRatingBar"
                         android:id="@+id/rating"
-
-                        android:progressTint="@color/colorPrimary"
+                        android:layout_marginLeft="-20dp"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
                         android:rating="2"
-                        android:secondaryProgressTint="@color/colorPrimary"
+                        android:isIndicator="true"
+                        android:focusable="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -260,16 +262,14 @@
         </LinearLayout>
 
         <RatingBar
-            android:progressBackgroundTint="@color/colorPrimary"
-            android:layout_marginTop="5dp"
+
+
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:numStars="5"
-
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            android:progressTint="@color/colorPrimary"
-            android:secondaryProgressTint="@color/colorPrimary"
+            style="@style/CustomRatingBar"
+            android:stepSize="1"
+           android:layout_margin="10dp"
             android:layout_height="wrap_content" />
 
     </LinearLayout>

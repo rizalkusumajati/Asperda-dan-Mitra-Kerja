@@ -65,6 +65,7 @@ public class LoginPresenterImp implements LoginPresenter {
                    System.out.println("Response body: " + response.body().getStat());
                    PrefHelper.setBoolean(PrefKey.PREF_LOGIN,true);
                    PrefHelper.setString(PrefKey.PREF_LOGIN_ID,response.body().getIdMember());
+                   PrefHelper.setString(PrefKey.PREF_LOGIN_ID_USER,response.body().getIdUser());
 
                    getMemberDetail(response.body().getIdMember(),activity);
                    System.out.println("Login Fragment " +PrefHelper.getBoolean(PrefKey.PREF_LOGIN));

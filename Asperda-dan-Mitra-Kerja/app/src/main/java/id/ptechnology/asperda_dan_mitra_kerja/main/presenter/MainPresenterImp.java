@@ -241,6 +241,8 @@ public class MainPresenterImp implements MainPresenter {
 
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN, response.body().get(0).getEmailMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_ID,response.body().get(0).getIdMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_ID_USER,response.body().get(0).getIdUser());
                         PrefHelper.setString(PrefKey.PREF_LOGIN_VIA,"google");
 
                         Constant.setEmailGoogleFound(true);
@@ -385,6 +387,10 @@ public class MainPresenterImp implements MainPresenter {
 
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAME, response.body().get(0).getNamaMember());
                         PrefHelper.setString(PrefKey.PREF_LOGIN_NAMA_PERUSAHAAN, response.body().get(0).getEmailMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_ID,response.body().get(0).getIdMember());
+                        PrefHelper.setString(PrefKey.PREF_LOGIN_ID_USER,response.body().get(0).getIdUser());
+
+
                         PrefHelper.setString(PrefKey.PREF_LOGIN_VIA,"facebook");
 
                         Constant.setEmailFacebookFound(true);

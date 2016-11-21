@@ -11,7 +11,8 @@ public enum PrefKey {
     PREF_LOGIN_NAME("member_name"),
     PREF_LOGIN_ID("member_id"),
     PREF_LOGIN_NAMA_PERUSAHAAN("company_nama"),
-    PREF_LOGIN_VIA("jenis")
+    PREF_LOGIN_VIA("jenis"),
+    PREF_LOGIN_ID_USER("id_user")
     ;
 
 

@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="simpan">Simpan</string>
 
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>
@@ -54,6 +55,16 @@
     <string name="prompt_nomor">Nomor Handphone</string>
     <string name="prompt_nama_perusahaan">Nama Perusahaan</string>
     <string name="prompt_input_ulang">Input Ulang Password</string>
+    <string name="prompt_kode_pos">Kode Pos</string>
+    <string name="prompt_nomorTlp1">No Telephone 1</string>
+    <string name="prompt_nomorTlp2">No Telephone 2</string>
+    <string name="prompt_nomor_fax">No Fax</string>
+    <string name="prompt_website">Website</string>
+    <string name="prompt_tahun_berdiri">Tahun Berdiri</string>
+    <string name="prompt_jumlah_kendaraan">Jumlah Kendaraan Total</string>
+    <string name="prompt_asosiasi">Asosiasi yang diikuti</string>
+    <string name="prompt_contact">Contact Person</string>
+    <string name="prompt_contact_phone">Contact Person Phone</string>
     <string name="daftar">Daftar</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>

@@ -14,6 +14,9 @@ public class MemberResponse {
     @SerializedName("id_member")
     @Expose
     private String idMember;
+    @SerializedName("id_user")
+    @Expose
+    private String idUser;
     @SerializedName("id_typemember")
     @Expose
     private Object idTypemember;
@@ -77,6 +80,25 @@ public class MemberResponse {
     public void setIdMember(String idMember) {
         this.idMember = idMember;
     }
+
+    /**
+     *
+     * @return
+     * The idUser
+     */
+    public String getIdUser() {
+        return idUser;
+    }
+
+    /**
+     *
+     * @param idUser
+     * The id_user
+     */
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
 
     /**
      *

@@ -49,6 +49,18 @@ public interface AsperdaClient {
     @GET("api/amember/getMemberByEmail")
     Call<List<MemberResponse>> getMemberByEmail(@Query("email") String email);
 
+    @FormUrlEncoded
+    @POST("api/amember/updateCompany")
+    Call<String> updateCompany(@Field("id_user") String id_user, @Field("id_member") String id_member,
+                               @Field("nama_company") String nama_company,@Field("ket_company") String ket_company,
+                                               @Field("bentuk_company") String bentuk_company,@Field("alamat_company") String alamat_company,
+                                               @Field("kota_company") String kota_company,@Field("kodepos_company") String kodepos_company,
+                                               @Field("tlp1_company") String tlp1_company,@Field("tlp2_company") String tlp2_company,
+                                               @Field("email_company") String email_company,@Field("website_company") String website_company,
+                                               @Field("tahunberdiri_company") String tahunberdiri_company,@Field("npwp_company") String npwp_company,
+                                               @Field("pkp_company") String pkp_company,@Field("referensi_company") String referensi_company,
+                                               @Field("latitude_company") String latitude_company,@Field("longitude_company") String longitude_company,
+                                               @Field("listbidang_company") String listbidang_company,@Field("pic_company") String pic_company);
 
 
 

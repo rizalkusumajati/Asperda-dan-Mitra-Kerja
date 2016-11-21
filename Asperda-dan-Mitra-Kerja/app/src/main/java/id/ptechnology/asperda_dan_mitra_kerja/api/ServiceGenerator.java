@@ -2,6 +2,9 @@ package id.ptechnology.asperda_dan_mitra_kerja.api;
 
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -26,11 +29,14 @@ public class ServiceGenerator {
     public static final String API_BASE_URL = "http://www.cekkendaraan.com/asperda_app/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    static  Gson gson = new GsonBuilder()
+            .setLenient()
+            .create();
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create());
+                    .addConverterFactory(GsonConverterFactory.create(gson));
 
     public ServiceGenerator(){
         if (username != null && password != null) {
@@ -110,6 +116,24 @@ public class ServiceGenerator {
 
     public void getMemberByEmail(String email, Callback <List<MemberResponse>>callback){
         Call<List<MemberResponse>> call=serviceClass.getMemberByEmail(email);
+        call.enqueue(callback);
+
+    }
+
+    public void updateCompany(String id_user,String id_member,String nama_company,String ket_company,
+                              String bentuk_company,String alamat_company, String kota_company, String kodepos_company,
+                              String tlp1_company,String tlp2_company,String email_company,String website_company,
+                              String tahunberdiri_company, String npwp_company,String pkp_company,
+                              String referensi_company,String latitude_company,String longitude_company,
+                              String listbidang_company,String pic_company,Callback<String> callback){
+
+        Call<String> call=serviceClass.updateCompany( id_user, id_member, nama_company, ket_company,
+                 bentuk_company, alamat_company,  kota_company,  kodepos_company,
+                 tlp1_company, tlp2_company, email_company, website_company,
+                 tahunberdiri_company,  npwp_company, pkp_company,
+                 referensi_company, latitude_company, longitude_company,
+                 listbidang_company, pic_company);
+
         call.enqueue(callback);
 
     }

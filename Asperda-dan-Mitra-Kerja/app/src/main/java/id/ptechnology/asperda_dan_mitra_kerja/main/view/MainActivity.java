@@ -9,14 +9,12 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,7 +26,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -39,10 +36,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import id.ptechnology.asperda_dan_mitra_kerja.R;
+import id.ptechnology.asperda_dan_mitra_kerja.account.view.AccountFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.login.view.LoginFragment;
 import id.ptechnology.asperda_dan_mitra_kerja.main.presenter.MainPresenter;
@@ -70,6 +65,7 @@ public class MainActivity extends AppCompatActivity
     private CallbackManager callbackManager;
     private LocationManager manager;
     private static final int REQUEST_CODE = 0;
+    private AccountFragment accountFragment;
     // private LocationListener locationListener;
     private Location location;
     private String provider;
@@ -114,6 +110,7 @@ public class MainActivity extends AppCompatActivity
         dashboardFragment = new DashboardFragment();
         registrasiFragment = new RegistrasiFragment();
         loginFragment = new LoginFragment();
+        accountFragment=new AccountFragment();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         System.out.println("isLogin " + PrefHelper.getBoolean(PrefKey.PREF_LOGIN));
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -249,7 +246,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            gotoSetting();
         } else if (id == R.id.nav_login) {
             gotoLogin();
         } else if (id == R.id.nav_logout) {
@@ -275,6 +272,10 @@ public class MainActivity extends AppCompatActivity
         presenter.gotoFragment(this, loginFragment);
 
 
+    }
+
+    public void gotoSetting(){
+        presenter.gotoFragment(this,accountFragment);
     }
 
     public void gotoRegister() {
