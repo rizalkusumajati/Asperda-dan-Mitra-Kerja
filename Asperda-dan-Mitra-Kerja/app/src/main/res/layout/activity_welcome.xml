@@ -4,29 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:id="@+id/layoutDots"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dots_height"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dots_margin_bottom"
-        android:gravity="center"
-        android:orientation="horizontal"></LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha=".5"
-        android:layout_above="@id/layoutDots"
-        android:background="@android:color/white" />
-
+<RelativeLayout
+    android:background="@color/colorPrimary"
+    android:id="@+id/steps"
+    android:layout_alignParentBottom="true"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp">
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
@@ -36,7 +24,15 @@
         android:background="@null"
         android:text="@string/next"
         android:textColor="@android:color/white" />
+    <LinearLayout
 
+        android:id="@+id/layoutDots"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+        android:orientation="horizontal"></LinearLayout>
     <Button
         android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
@@ -46,5 +42,11 @@
         android:background="@null"
         android:text="@string/skip"
         android:textColor="@android:color/white" />
+</RelativeLayout>
 
+    <android.support.v4.view.ViewPager
+        android:layout_above="@id/steps"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

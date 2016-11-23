@@ -39,6 +39,7 @@
     <string name="login_facebook">Login dengan facebook</string>
     <string name="belum_member">Belum jadi member? <b>Daftar sekarang</b></string>
     <string name="judul_registrasi">Daftar Rent Car Indonesia</string>
+    <string name="judul_setting">Account Setting</string>
 
     <string name="facebook_app_id">102466333572783</string>
 

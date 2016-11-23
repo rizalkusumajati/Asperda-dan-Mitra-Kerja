@@ -89,12 +89,18 @@ public class MainPresenterImp implements MainPresenter {
                 break;
             case "google":
                 logout(Constant.getmGoogleApiClient(),activity);
+                PrefHelper.setBoolean(PrefKey.PREF_LOGIN,false);
+                PrefHelper.clearPreference(PrefKey.PREF_LOGIN_ID);
+                PrefHelper.clearPreference(PrefKey.PREF_LOGIN_NAME);
                // mGoogleApiClient.stopAutoManage();
 
              //   Constant.setmGoogleApiClient(null);
                 break;
             case "facebook":
                 LoginManager.getInstance().logOut();
+                PrefHelper.setBoolean(PrefKey.PREF_LOGIN,false);
+                PrefHelper.clearPreference(PrefKey.PREF_LOGIN_ID);
+                PrefHelper.clearPreference(PrefKey.PREF_LOGIN_NAME);
                 break;
             default:
                 break;

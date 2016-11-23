@@ -62,7 +62,11 @@ public interface AsperdaClient {
                                                @Field("latitude_company") String latitude_company,@Field("longitude_company") String longitude_company,
                                                @Field("listbidang_company") String listbidang_company,@Field("pic_company") String pic_company);
 
+    @GET("api/amember/getKota")
+    Call<List<KotaResponse>> getKota();
 
+    @GET("api/amember/getBentukCompany")
+    Call<List<BentukCompanyResponse>> getBentukCompany();
 
 
 }

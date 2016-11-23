@@ -139,4 +139,15 @@ public class ServiceGenerator {
     }
 
 
+    public void getKota(Callback <List<KotaResponse>>callback){
+        Call<List<KotaResponse>> call=serviceClass.getKota();
+        call.enqueue(callback);
+
+    }
+
+    public void getBentukCompany(Callback <List<BentukCompanyResponse>>callback){
+        Call<List<BentukCompanyResponse>> call=serviceClass.getBentukCompany();
+        call.enqueue(callback);
+
+    }
 }

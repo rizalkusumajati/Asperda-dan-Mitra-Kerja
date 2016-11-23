@@ -4,7 +4,7 @@
     android:id="@+id/activity_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/white_circle"
 
     tools:context="id.ptechnology.asperda_dan_mitra_kerja.dashboard.view.DashboardFragment">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
-        android:background="@android:color/white"
+        android:background="@color/white_circle"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -30,10 +30,9 @@
             android:layout_height="50dp"/>
 
         <LinearLayout
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
+
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"
+            android:background="@color/white_circle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -44,14 +43,18 @@
             android:orientation="vertical">
             <TextView
 
-                android:layout_marginTop="10dp"
+               android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
 
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
+
+                android:layout_width="match_parent"
                 android:textColor="@color/textBlack"
                 android:layout_height="wrap_content"
                 android:text="@string/anggota_asperda_terdekat"/>
             <ListView
+                android:divider="@android:color/transparent"
+                android:dividerHeight="3dp"
                 android:scrollbars="none"
                 android:id="@+id/listViewAnggota"
                 android:layout_width="match_parent"
@@ -64,15 +67,18 @@
             android:orientation="vertical">
             <TextView
                 android:textColor="@color/textBlack"
-                android:layout_marginTop="10dp"
 
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mitra_asperda_terdekat"/>
             <ListView
-
+                android:divider="@android:color/transparent"
                 android:scrollbars="none"
+                android:dividerHeight="3dp"
                 android:id="@+id/listViewMitra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>

@@ -4,6 +4,7 @@ package id.ptechnology.asperda_dan_mitra_kerja.account.view;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.account.presenter.AccountFragmentPresenter;
 import id.ptechnology.asperda_dan_mitra_kerja.account.presenter.AccountFragmentPresenterImp;
 import id.ptechnology.asperda_dan_mitra_kerja.account.presenter.AccountFragmentView;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefHelper;
 import id.ptechnology.asperda_dan_mitra_kerja.preferences.PrefKey;
 
@@ -30,6 +35,9 @@ public class AccountFragment extends Fragment implements AccountFragmentView{
     private String[] arraySpinner,arrayJenis;
     private Button btnSimpan;
     private AccountFragmentPresenter presenter;
+    private ArrayList<String> kota=new ArrayList<>();
+    private ArrayList<String> bentukCompany=new ArrayList<>();
+
 
     public AccountFragment() {
         // Required empty public constructor
@@ -60,22 +68,53 @@ public class AccountFragment extends Fragment implements AccountFragmentView{
         spinnerPerusahaan=(Spinner)view.findViewById(R.id.spinnerPerusahaan);
 
         btnSimpan=(Button)view.findViewById(R.id.btn_simpan);
+        Log.i("login",PrefHelper.getString(PrefKey.PREF_LOGIN_ID));
+
+        if (PrefHelper.getBoolean(PrefKey.PREF_LOGIN)){
+           // btnSimpan.setVisibility(View.VISIBLE);
+            btnSimpan.setEnabled(true);
+            btnSimpan.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+
+        }
+        else {
+          //  btnSimpan.setVisibility(View.INVISIBLE);
+            btnSimpan.setEnabled(false);
+            btnSimpan.setBackgroundColor(getResources().getColor(R.color.grey_default));
+            showToast("Silahkan login terlebih dahulu");
+        }
 
         presenter=new AccountFragmentPresenterImp(this);
+       // kota.add("Kota");
+       // bentukCompany.add("Bentuk Perusahaan");
+        if (Constant.getKotaResponses()==null) {
+            presenter.getKota(kota,spinnerKota,getActivity());
+        }
+        else {
+            kota.clear();
+            presenter.setKota(kota,spinnerKota,getActivity());
+        }
 
-        this.arraySpinner = new String[] {
-                "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"
-        };
+        if (Constant.getBentukCompanyResponses()==null) {
+            presenter.getBentukCompany(bentukCompany,spinnerPerusahaan,getActivity());
+        }
+        else {
+            bentukCompany.clear();
+            presenter.setBentukCompany(bentukCompany,spinnerPerusahaan,getActivity());
+        }
 
-        this.arrayJenis = new String[] {
-                "CV", "PT"
-        };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item, arraySpinner);
-        spinnerKota.setAdapter(adapter);
+//        this.arraySpinner = new String[] {
+//                "Kota 1", "Kota 2", "Kota 3", "Kota 4", "Kota 5"
+//        };
+//
+//        this.arrayJenis = new String[] {
+//                "CV", "PT"
+//        };
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item, arrayJenis);
-        spinnerPerusahaan.setAdapter(adapter1);
+
+
+
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +126,7 @@ public class AccountFragment extends Fragment implements AccountFragmentView{
                             etNamaPerusahaan.getText().toString(),null,spinnerPerusahaan.getSelectedItem().toString(),etAlamat.getText().toString(),
                             spinnerKota.getSelectedItem().toString(),etKodePos.getText().toString(),etNoTelp1.getText().toString(),
                             etNoTelp2.getText().toString(),etEmail.getText().toString(),etWeb.getText().toString(),etTahun.getText().toString(),
-                            null,null,null,null,null,null,null);
+                            null,null,null,"0","0",null,null);
 
                 }
             }

@@ -1,13 +1,21 @@
 package id.ptechnology.asperda_dan_mitra_kerja.account.presenter;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import id.ptechnology.asperda_dan_mitra_kerja.R;
 import id.ptechnology.asperda_dan_mitra_kerja.api.AccountResponse;
+import id.ptechnology.asperda_dan_mitra_kerja.api.BentukCompanyResponse;
+import id.ptechnology.asperda_dan_mitra_kerja.api.KotaResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
+import id.ptechnology.asperda_dan_mitra_kerja.model.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -111,5 +119,62 @@ public class AccountFragmentPresenterImp implements AccountFragmentPresenter {
                 });
 
 
+    }
+
+    @Override
+    public void getKota(final ArrayList<String> kota, final Spinner spinnerKota, final Activity activity) {
+        new ServiceGenerator().getKota(new Callback<List<KotaResponse>>() {
+            @Override
+            public void onResponse(Call<List<KotaResponse>> call, Response<List<KotaResponse>> response) {
+                Log.i("ResponseKota","response kota : "+response.code());
+                if (response.code()==200){
+                    Constant.setKotaResponses(response.body());
+                    setKota(kota,spinnerKota,activity);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<KotaResponse>> call, Throwable t) {
+                Log.i("ResponseKota","response kota failed : "+t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void setKota(ArrayList<String> kota, Spinner spinnerKota, Activity activity) {
+        for (KotaResponse kotaResponse:Constant.getKotaResponses()){
+            kota.add(kotaResponse.getNamaKota());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item, kota);
+        spinnerKota.setAdapter(adapter);
+    }
+
+    @Override
+    public void getBentukCompany(final ArrayList<String> bentukCompany, final Spinner spinnerPerusahaan, final Activity activity) {
+        new ServiceGenerator().getBentukCompany(new Callback<List<BentukCompanyResponse>>() {
+            @Override
+            public void onResponse(Call<List<BentukCompanyResponse>> call, Response<List<BentukCompanyResponse>> response) {
+                if (response.code()==200){
+                    Constant.setBentukCompanyResponses(response.body());
+                    setBentukCompany(bentukCompany,spinnerPerusahaan,activity);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BentukCompanyResponse>> call, Throwable t) {
+                Log.i("ResponseBentuk","response bentuk failed : "+t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void setBentukCompany(ArrayList<String> bentukCompany,Spinner spinnerPerusahaan,Activity activity) {
+        for (BentukCompanyResponse bentukCompanyResponse:Constant.getBentukCompanyResponses()){
+            bentukCompany.add(bentukCompanyResponse.getBentukCompany());
+        }
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(activity,R.layout.spinner_item, bentukCompany);
+        spinnerPerusahaan.setAdapter(adapter1);
     }
 }

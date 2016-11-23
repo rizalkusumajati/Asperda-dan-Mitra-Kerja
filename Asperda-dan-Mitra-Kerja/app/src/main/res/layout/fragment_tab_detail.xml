@@ -59,7 +59,7 @@
                     <RatingBar
                         style="@style/CustomRatingBar"
                         android:id="@+id/rating"
-                        android:layout_marginLeft="-20dp"
+                        android:layout_marginLeft="-25dp"
                         android:scaleX="0.5"
                         android:scaleY="0.5"
                         android:rating="2"

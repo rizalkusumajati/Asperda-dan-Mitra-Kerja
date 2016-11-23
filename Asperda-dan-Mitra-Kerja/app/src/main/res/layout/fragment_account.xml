@@ -15,7 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <TextView
+            android:textColor="@color/textBlack"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/judul_setting" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -54,6 +62,13 @@
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_marginLeft="3dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kota"/>
 
     <LinearLayout
         android:layout_marginTop="5dp"
@@ -183,7 +198,12 @@
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
+        <TextView
 
+            android:layout_marginLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bentuk Perusahaan"/>
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -297,10 +317,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="20dp"
         android:id="@+id/btn_simpan"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:text="@string/simpan"/>
     </LinearLayout>
     </ScrollView>

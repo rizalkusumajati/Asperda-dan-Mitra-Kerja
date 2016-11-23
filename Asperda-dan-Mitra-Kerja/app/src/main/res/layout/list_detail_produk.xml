@@ -1,152 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@android:color/white"
-    android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="1dp"
+    android:layout_marginBottom="16dp">
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/country_photo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:contentDescription="@string/action_settings"
+            android:src="@drawable/ic_directions_car_black_24dp"
+            android:scaleType="centerCrop" />
+<LinearLayout
+    android:paddingLeft="5dp"
+    android:layout_below="@id/country_photo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_namaMobil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <LinearLayout
 
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/iv_fotoProduk"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_directions_car_black_24dp"
+        android:text="@string/prompt_kode_pos"
+        android:textColor="@color/textBlack"
 
-                />
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/tv_namaKeterangan"
-                android:textColor="@android:color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Inova"/>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_namaMobil"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NAMA MOBIL "/>
 
-            <TextView
-                android:textStyle="bold"
-                android:id="@+id/tv_harga"
-                android:textColor="@color/textBlack"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rp. 60000"/>
 
-             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+       />
 
-                    <TextView
-                        android:textColor="@color/textBlack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Keterangan "/>
+    <TextView
+        android:id="@+id/tv_harga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:text="@string/prompt_kode_pos"
+        android:textColor="@color/colorPrimary"
 
-                    <!--<TextView-->
-                        <!--android:textColor="@color/textBlack"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:layout_marginBottom="5dp"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Sopir"/>-->
 
-                    <!--<TextView-->
-                        <!--android:textColor="@color/textBlack"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="BBM"/>-->
 
-            </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
+        />
 
-                     <TextView
-                         android:textColor="@color/textBlack"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text=":"/>
+    <RatingBar
+        android:layout_marginLeft="-22dp"
+        android:scaleY="0.6"
+        android:scaleX="0.6"
+        style="@style/CustomRatingBar"
+        android:id="@+id/rating"
+        android:rating="2"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-                     <!--<TextView-->
-                         <!--android:textColor="@color/textBlack"-->
-                         <!--android:layout_marginTop="5dp"-->
-                         <!--android:layout_marginBottom="5dp"-->
-                         <!--android:layout_width="wrap_content"-->
-                         <!--android:layout_height="wrap_content"-->
-                         <!--android:text=":"/>-->
 
-                     <!--<TextView-->
-                         <!--android:textColor="@color/textBlack"-->
-                         <!--android:layout_width="wrap_content"-->
-                         <!--android:layout_height="wrap_content"-->
-                         <!--android:text=":"/>-->
 
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_marginLeft="10dp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-
-                     <TextView
-                         android:id="@+id/tv_lokasiMobil"
-                         android:textColor="@color/textBlack"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Lokasi"/>
-
-                     <!--<TextView-->
-                         <!--android:id="@+id/tv_sopir"-->
-                         <!--android:textColor="@color/textBlack"-->
-                         <!--android:layout_marginTop="5dp"-->
-                         <!--android:layout_marginBottom="5dp"-->
-                         <!--android:layout_width="wrap_content"-->
-                         <!--android:layout_height="wrap_content"-->
-                         <!--android:text="Sopir"/>-->
-
-                     <!--<TextView-->
-                         <!--android:id="@+id/tv_bbm"-->
-                         <!--android:textColor="@color/textBlack"-->
-                         <!--android:layout_width="wrap_content"-->
-                         <!--android:layout_height="wrap_content"-->
-                         <!--android:text="BBM"/>-->
-
-                 </LinearLayout>
-
-        </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
+        />
 
 </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

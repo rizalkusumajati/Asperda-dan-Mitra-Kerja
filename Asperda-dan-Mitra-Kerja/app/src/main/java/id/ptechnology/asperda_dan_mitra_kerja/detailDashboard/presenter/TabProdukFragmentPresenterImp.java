@@ -1,6 +1,8 @@
 package id.ptechnology.asperda_dan_mitra_kerja.detailDashboard.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -9,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import id.ptechnology.asperda_dan_mitra_kerja.adapter.ListProdukAdapter;
+import id.ptechnology.asperda_dan_mitra_kerja.adapter.RecyclerClickListener;
+import id.ptechnology.asperda_dan_mitra_kerja.adapter.RecyclerProduk;
 import id.ptechnology.asperda_dan_mitra_kerja.api.CompanyResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ProdukResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ServiceGenerator;
@@ -23,7 +27,7 @@ import retrofit2.Response;
 
 public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter {
     @Override
-    public void getProdukByMember(final ArrayList<HashMap<String, String>> listDetail, final ListProdukAdapter adapter, final ListView listView, final Activity activity) {
+    public void getProdukByMember(final ArrayList<HashMap<String, String>> listDetail, final RecyclerProduk adapter, final RecyclerView listView, final Activity activity) {
         new ServiceGenerator().getProdukByMember(Constant.getIdCompany(), new Callback<List<ProdukResponse>>() {
             @Override
             public void onResponse(Call<List<ProdukResponse>> call, Response<List<ProdukResponse>> response) {
@@ -39,12 +43,14 @@ public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter
                     }
 
                     else {
-                        List<ProdukResponse> produkResponses = new ArrayList<ProdukResponse>();
-                        ProdukResponse produkResponse=new ProdukResponse();
-                        produkResponse.setKetProduct("Belum ada Produk yang dimasukkan");
-                        produkResponses.add(produkResponse);
-                        Constant.setProdukBymember(produkResponses);
-                        setListView(listDetail, adapter, listView, activity);
+
+
+//                        List<ProdukResponse> produkResponses = new ArrayList<ProdukResponse>();
+//                        ProdukResponse produkResponse=new ProdukResponse();
+//                        produkResponse.setKetProduct("Belum ada Produk yang dimasukkan");
+//                        produkResponses.add(produkResponse);
+//                        Constant.setProdukBymember(produkResponses);
+//                        setListView(listDetail, adapter, listView, activity);
 
                     }
 
@@ -59,14 +65,17 @@ public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter
     }
 
     @Override
-    public void setListView(ArrayList<HashMap<String, String>> listDetail, ListProdukAdapter adapter, ListView listView, Activity activity){
+    public void setListView(ArrayList<HashMap<String, String>> dataset, final RecyclerProduk adapter, RecyclerView recyclerView, Activity activity){
 
-        listDetail = new ArrayList<HashMap<String, String>>();
-        adapter = new ListProdukAdapter(activity, listDetail);
-        adapter.clear();
+        dataset = new ArrayList<HashMap<String, String>>();
+//        adapter = new ListProdukAdapter(activity, listDetail);
+//        adapter.clear();
+
+
+
 
         if (Constant.getProdukBymember()==null){
-            getProdukByMember(listDetail,adapter,listView,activity);
+            getProdukByMember(dataset,adapter,recyclerView,activity);
         }
 
         else {
@@ -83,13 +92,18 @@ public class TabProdukFragmentPresenterImp implements TabProdukFragmentPresenter
                 map.put(Constant.KEY_HARGA_MOBIL,produkResponse.getHargaProduct());
 
 
-                adapter.addItem(map);
+                dataset.add(map);
+
+
 
 
             }
 
-            listView.setAdapter(adapter);
+            RecyclerProduk rcAdapter = new RecyclerProduk(activity, dataset);
+            recyclerView.setAdapter(rcAdapter);
+
         }
+
 
 
 

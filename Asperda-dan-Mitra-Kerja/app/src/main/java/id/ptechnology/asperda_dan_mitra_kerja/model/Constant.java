@@ -6,7 +6,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.List;
 
+import id.ptechnology.asperda_dan_mitra_kerja.api.BentukCompanyResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.CompanyResponse;
+import id.ptechnology.asperda_dan_mitra_kerja.api.KotaResponse;
 import id.ptechnology.asperda_dan_mitra_kerja.api.ProdukResponse;
 
 /**
@@ -36,6 +38,17 @@ public class Constant {
 
     //end keperluan tab produk
 
+    public static List<KotaResponse> kotaResponses;
+    public static List<BentukCompanyResponse> bentukCompanyResponses;
+
+    public static List<BentukCompanyResponse> getBentukCompanyResponses() {
+        return bentukCompanyResponses;
+    }
+
+    public static void setBentukCompanyResponses(List<BentukCompanyResponse> bentukCompanyResponses) {
+        Constant.bentukCompanyResponses = bentukCompanyResponses;
+    }
+
     public static String emailGoogle;
     public static String namaGoogle;
 
@@ -56,6 +69,14 @@ public class Constant {
     public static List<ProdukResponse>produkBymember;
 
     public static GoogleApiClient mGoogleApiClient;
+
+    public static List<KotaResponse> getKotaResponses() {
+        return kotaResponses;
+    }
+
+    public static void setKotaResponses(List<KotaResponse> kotaResponses) {
+        Constant.kotaResponses = kotaResponses;
+    }
 
     public static String getLoginIntegrate() {
         return loginIntegrate;
