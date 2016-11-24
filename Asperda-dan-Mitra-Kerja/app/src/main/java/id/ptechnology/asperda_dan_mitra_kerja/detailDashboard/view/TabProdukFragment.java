@@ -49,10 +49,10 @@ public class TabProdukFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_tab_produk, container, false);
-        //listView=(ListView)view.findViewById(R.id.listView);
+
         presenter=new TabProdukFragmentPresenterImp();
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerView);
-       // mLayoutManager = new GridLayoutManager(getContext(),1);
+
 
 
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,14 +60,13 @@ public class TabProdukFragment extends Fragment {
 
 
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
-//        Log.i("dataset",""+dataset.size());
-        //RecyclerView rView = (RecyclerView)findViewById(R.id.recycler_view);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
 
 
          presenter.setListView(dataset,recyclerAdapter,recyclerView,getActivity());
-        //presenter.setListView(dataset,recyclerAdapter,recyclerView,getActivity());
+
 
 
         return view;

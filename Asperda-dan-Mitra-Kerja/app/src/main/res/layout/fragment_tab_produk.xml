@@ -23,8 +23,9 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/filter"/>
             <TextView
+                android:textColor="@color/textBlack"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,8 +41,9 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/sort"/>
             <TextView
+                android:textColor="@color/textBlack"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

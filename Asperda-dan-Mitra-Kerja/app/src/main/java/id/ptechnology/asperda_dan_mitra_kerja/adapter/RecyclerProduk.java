@@ -51,7 +51,7 @@ public class RecyclerProduk extends RecyclerView.Adapter<RecyclerViewHolder> {
             Picasso.with(context).load(Constant.URL_PIC_COMPANY + itemList.get(position).get(Constant.KEY_PIC_COMPANY)).into(holder.countryPhoto);
         }
 
-
+        
         //holder.countryPhoto.setImageResource(itemList.get(position));
     }
 
